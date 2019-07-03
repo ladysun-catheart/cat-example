@@ -2,8 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import App from './app';
-import TopBar from './core/top-bar';
-import MainContent from './core/main-content';
+import TopBar from './core/components/top-bar';
+import MainContent from './core/components/main-content';
 
 import { configure, shallow, mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';

@@ -1,19 +1,26 @@
 import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
+import { Link } from 'react-router-dom';
 
+const linkCat = {key: 'list', label:'List', path:'/cat'};
+const linkContact = {key: 'contact', label:'Contact', path:'/contact'};
 const optionList = [
-  {key: 'list', label:'List', path:'#link'},
-  {key: 'contact', label:'contact', path:'#contact'}
+  linkCat,
+  linkContact
 ];
 
 const TopBar = () => {
   return ( 
     <Navbar bg="dark" variant="dark">
-        <Navbar.Brand href="#">Super Neko</Navbar.Brand>
-        <Nav classname="mr-auto">
-          {optionList.map( op => <Nav.Link key={op.key} href={op.path}>{op.label}</Nav.Link>)}
-        </Nav>
+      <Navbar.Brand href={linkCat.path}>Super Neko</Navbar.Brand>
+      <Nav classname="mr-auto">
+        {optionList.map( op => (
+          <Nav.Link key={op.key}>
+            <Link to={op.path}>{op.label}</Link>
+          </Nav.Link>
+        ))}
+      </Nav>
     </Navbar>
   );
 }
