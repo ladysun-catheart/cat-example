@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table'
 
 const CatList = ({ catList }) => {
@@ -23,5 +24,9 @@ const CatList = ({ catList }) => {
     </div> 
   );
 }
+
+CatList.propTypes = {
+  catList: PropTypes.array
+};
  
 export default CatList;

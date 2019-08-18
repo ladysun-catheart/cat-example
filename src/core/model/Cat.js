@@ -1,5 +1,3 @@
-import { List } from 'immutable';
-
 class Cat {
 
   constructor(id, name, sex, birthday, breed, description) {

@@ -7,9 +7,16 @@ import CatActions from './cat-actions';
 
 class Cat extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      catList: []
+    };
+  }
+
   componentDidMount() {
     CatApi.fetchCatList()
-      .then( catList => )
+      .then( res => this.setState({catList: res.data}))
   }
 
   render() {
@@ -17,7 +24,7 @@ class Cat extends React.Component {
       <>
         <Row>
           <Col><CatInfo /></Col>
-          <Col><CatList /></Col>
+          <Col><CatList catList={this.state.catList} /></Col>
         </Row>
         <Row>
           <Col><CatActions /></Col>
