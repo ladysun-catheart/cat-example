@@ -1,6 +1,10 @@
-const mapStateToProps = state => {
-    catList: state.cat.catListFinded,
-};
-const mapDispacthToProps = dispatch => {
-    setCatsFinded: catListFinded => 
-};
+import {connect} from 'react-redux';
+import CatList from './cat-list';
+
+const mapStateToProps = state => ({
+    catList: state.cat.catListFinded
+});
+const mapDispacthToProps = dispatch => ({});
+const CatListConnect = connect(mapStateToProps, mapDispacthToProps)(CatList);
+
+export default CatListConnect;

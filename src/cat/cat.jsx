@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import CatApi from '../core/apis/cat-api';
 import CatInfo from './cat-info';
@@ -12,11 +13,16 @@ class Cat extends React.Component {
     this.state = {
       catList: []
     };
+    this.getCatList = this.getCatList.bind(this);
   }
 
   componentDidMount() {
-    CatApi.fetchCatList()
-      .then( res => this.setState({catList: res.data}))
+    this.getCatList(1);
+  }
+
+  getCatList(page) {
+    CatApi.fetchCatList(page, 10)
+      .then(res => this.props.persistCatList(res.data.catTotalStored, res.data.catList))
   }
 
   render() {
@@ -24,7 +30,9 @@ class Cat extends React.Component {
       <>
         <Row>
           <Col><CatInfo /></Col>
-          <Col><CatList catList={this.state.catList} /></Col>
+          <Col>
+            <CatList onChangePage={(page) => this.getCatList(page)} />
+          </Col>
         </Row>
         <Row>
           <Col><CatActions /></Col>
@@ -34,5 +42,9 @@ class Cat extends React.Component {
   }
 
 }
+
+Cat.propTypes = {
+  persistCatList: PropTypes.func
+};
  
 export default Cat;

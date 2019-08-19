@@ -10,9 +10,10 @@ const catSelected = (cat) => ({
   cat
 });
 
-const saveCatList = (catList) => ({
-  typw: actions.SUCCESS_FILL_CAT_LIST,
-  catList
+const persistCatList = (catTotalStored, catListFinded) => ({
+  type: actions.SUCCESS_FILL_CAT_LIST,
+  catTotalStored,
+  catListFinded
 });
 
 /* const selectCat = (idCat) => (dispatch) => CatApi.fetchCatById(idCat)
@@ -26,7 +27,7 @@ const fillCatList = () => (dispatch) => CatApi.fetchCatList()
 const CatActions = {
   actions,
   catSelected,
-  saveCatList
+  persistCatList
 };
 
 export default CatActions;
