@@ -14,7 +14,7 @@ const TopBar = () => {
   return ( 
     <Navbar bg="dark" variant="dark">
       <Navbar.Brand>Super Neko</Navbar.Brand>
-      <Nav classname="mr-auto">
+      <Nav className="mr-auto">
         {optionList.map( op => (
           <Nav.Link key={op.key}>
             <Link to={op.path}>{op.label}</Link>
