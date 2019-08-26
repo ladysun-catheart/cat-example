@@ -1,29 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
-import Pagination from 'react-bootstrap/Pagination';
-import PageItem from 'react-bootstrap/PageItem';
+import CatListPaginator from './cat-list-paginator';
 
-const CatListPagination = ({ catList }) => {
-  const isVisibleFirst = () => {};
-  const isVisiblePrev = () => {};
-  const isVisibleNext = () => {};
-  const isVisibleLast = () => {};
-  const getPages = () => {};
-  return(
-    <Pagination>
-      <Pagination.First></Pagination.First>
-      <Pagination.Prev></Pagination.Prev>
-      <Pagination.Item>{1}</Pagination.Item>
-      <Pagination.Item>{2}</Pagination.Item>
-      <Pagination.Item>{3}</Pagination.Item>
-      <Pagination.Next></Pagination.Next>
-      <Pagination.Last></Pagination.Last>
-    </Pagination>
-  );
-};
-
-const CatList = ({ catList, catTotal, onChangePage }) => {
+const CatList = ({ catList, rows, catTotal, onChangePage }) => {
   return ( 
     <div>
       <Table>
@@ -35,20 +15,25 @@ const CatList = ({ catList, catTotal, onChangePage }) => {
         </thead>
         <tbody>
           {catList.map(cat => (
-            <tr>
+            <tr key={cat.id}>
               <td>{cat.id}</td>
               <td>{cat.name}</td>
             </tr>
           ))}
         </tbody>
       </Table>
-      <CatListPagination catList />
+      <CatListPaginator 
+        rows={rows} 
+        catTotal={catTotal}
+        onChangePage={onChangePage}
+      />
     </div> 
   );
 }
 
 CatList.propTypes = {
   catList: PropTypes.array,
+  rows: PropTypes.number,
   catTotal: PropTypes.number,
   onChangePage: PropTypes.func
 };

@@ -13,6 +13,7 @@ class Cat extends React.Component {
     this.state = {
       catList: []
     };
+    this.rows = 10;
     this.getCatList = this.getCatList.bind(this);
   }
 
@@ -21,7 +22,7 @@ class Cat extends React.Component {
   }
 
   getCatList(page) {
-    CatApi.fetchCatList(page, 10)
+    CatApi.fetchCatList(page, this.rows)
       .then(res => this.props.persistCatList(res.data.catTotalStored, res.data.catList))
   }
 
@@ -31,7 +32,10 @@ class Cat extends React.Component {
         <Row>
           <Col><CatInfo /></Col>
           <Col>
-            <CatList onChangePage={(page) => this.getCatList(page)} />
+            <CatList 
+              onChangePage={(page) => this.getCatList(page)}
+              rows={this.rows}
+            />
           </Col>
         </Row>
         <Row>

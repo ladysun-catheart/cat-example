@@ -4,7 +4,7 @@ import CatActions from './../actions/cat-actions';
 const initialState = {
   catSelected: new Cat(),
   catListFinded: [],
-  catTotalStored: undefined
+  catTotalStored: 0
 };
 
 function reducer(state = initialState, {type, cat, catTotalStored, catListFinded}) {
