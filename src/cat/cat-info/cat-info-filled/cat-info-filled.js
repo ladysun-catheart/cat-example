@@ -14,7 +14,7 @@ const CatInfoFilled = ({cat}) => {
     return label;
   };
   return ( 
-    <Card style={{marginTop: '20px'}}>
+    <Card>
       <Card.Body>
         <Card.Title>🐱 {getLabelProp(cat.id)} - {getLabelProp(cat.name)}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">{cat.sex.icon} {getLabelBirthday(cat.birthday)}</Card.Subtitle>
