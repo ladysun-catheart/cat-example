@@ -29,10 +29,10 @@ class Cat extends React.Component {
   render() {
     return (
       <>
-        <Row>
+        <Row style={{marginTop: '20px'}}>
           <Col><CatInfo /></Col>
           <Col>
-            <CatList 
+            <CatList
               onChangePage={(page) => this.getCatList(page)}
               rows={this.rows}
             />

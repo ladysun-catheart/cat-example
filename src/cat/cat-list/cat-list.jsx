@@ -3,10 +3,25 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import CatListPaginator from './cat-list-paginator';
 
-const CatList = ({ catList, rows, catTotal, onChangePage }) => {
+const CatListRow = ({cat, onClickCat}) => {
+  let [styleRow, setStyleRow] = useState({ cursor: 'default'});
+  return (
+    <tr
+      style={styleRow} 
+      onClick={() => onClickCat(cat)} 
+      onMouseEnter={() => setStyleRow({ cursor: 'pointer'})} 
+      onMouseLeave={() => setStyleRow({ cursor: 'default'})}
+    >
+      <td>{cat.id}</td>
+      <td>{cat.name}</td>
+    </tr>
+  );
+};
+
+const CatList = ({ catList, rows, catTotal, onClickCat, onChangePage }) => {
   return ( 
     <div>
-      <Table>
+      <Table striped bordered hover>
         <thead>
           <tr>
             <th>id</th>
@@ -14,12 +29,7 @@ const CatList = ({ catList, rows, catTotal, onChangePage }) => {
           </tr>
         </thead>
         <tbody>
-          {catList.map(cat => (
-            <tr key={cat.id}>
-              <td>{cat.id}</td>
-              <td>{cat.name}</td>
-            </tr>
-          ))}
+          {catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
         </tbody>
       </Table>
       <CatListPaginator 
