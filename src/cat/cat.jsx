@@ -7,7 +7,7 @@ import CatActions from './cat-actions';
 const Cat = () => {
   return(
     <>
-      <Row style={{marginTop: '20px'}}>
+      <Row>
         <Col>
           <CatInfo />
         </Col>

@@ -8,7 +8,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 const App = () => (
   <Router>
     <TopBar />
-    <MainContent />
+    <div style={{marginTop: '20px'}}>
+      <MainContent />
+    </div>
   </Router>
 );
 
