@@ -1,10 +1,10 @@
-import Cat from './../../../model/Cat';
+import Cat, {CatSex} from './../../../model/Cat';
 import CatActions from './../actions/cat-actions';
 
 const initialState = {
-  catSelected: new Cat(),
+  catSelected: null,
   catListFinded: [],
-  catTotalStored: 0
+  catTotalStored: 0,
 };
 
 function reducer(state = initialState, {type, cat, catTotalStored, catListFinded}) {

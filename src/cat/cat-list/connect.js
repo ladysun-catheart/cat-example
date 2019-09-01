@@ -1,4 +1,4 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import CatList from './cat-list';
 
 const mapStateToProps = state => ({
