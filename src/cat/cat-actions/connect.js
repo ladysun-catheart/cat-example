@@ -5,7 +5,7 @@ const mapStateToProps = (state) => ({
     cat: state.cat.catSelected,
     catList: state.cat.catListFinded
 });
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = () => ({});
 const CatActionsConnect = connect(mapStateToProps, mapDispatchToProps)(CatActions);
 
 export default CatActionsConnect;
