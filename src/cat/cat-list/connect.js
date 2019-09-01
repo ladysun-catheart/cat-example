@@ -7,7 +7,8 @@ const mapStateToProps = state => ({
     catTotal: state.cat.catTotalStored
 });
 const mapDispacthToProps = (dispatch) => ({
-    onClickCat: (cat) => dispatch(CatActions.catSelected(cat))
+    onClickCat: (cat) => dispatch(CatActions.catSelected(cat)),
+    saveCatList: (catTotalStored, catListFinded) => dispatch(CatActions.persistCatList(catTotalStored, catListFinded))
 });
 const CatListConnect = connect(mapStateToProps, mapDispacthToProps)(CatList);
 
