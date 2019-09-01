@@ -4,7 +4,6 @@ import Pagination from 'react-bootstrap/Pagination';
 
 const CatListPaginator = ({ rows, catTotal, onChangePage }) => {
   const [actualPage, setActualPage] = useState(1);
-  console.log('actual page: ', actualPage);
   const totalPages = catTotal / rows; 
   const isDisablePrevFirst = () => actualPage === 1;
   const isDisableNextLast = () => actualPage === totalPages;

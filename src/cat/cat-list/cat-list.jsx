@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import CatListPaginator from './cat-list-paginator';
+import CatApi from '../../core/apis/cat-api';
+import { CatActions } from '../../core/store/redux/actions';
 
 const CatListRow = ({cat, onClickCat}) => {
-  let [styleRow, setStyleRow] = useState({ cursor: 'default'});
+  const [styleRow, setStyleRow] = useState({ cursor: 'default'});
   return (
     <tr
       style={styleRow} 
@@ -18,7 +20,20 @@ const CatListRow = ({cat, onClickCat}) => {
   );
 };
 
-const CatList = ({ catList, rows, catTotal, onClickCat, onChangePage }) => {
+CatListRow.propTypes = {
+  cat: PropTypes.object,
+  onClickCat: PropTypes.func
+};
+
+const CatList = ({ catList, catTotal, onClickCat, saveCatList }) => {
+  const getCatList = (page) => {
+    CatApi.fetchCatList(page, 10)
+        .then(res => saveCatList(res.data.catTotalStored, res.data.catList));
+  };
+  useEffect(() => {
+    getCatList(1);
+    return () => saveCatList(0, [])
+  }, []);
   return ( 
     <div>
       <Table striped bordered hover>
@@ -33,9 +48,9 @@ const CatList = ({ catList, rows, catTotal, onClickCat, onChangePage }) => {
         </tbody>
       </Table>
       <CatListPaginator 
-        rows={rows} 
+        rows={10} 
         catTotal={catTotal}
-        onChangePage={onChangePage}
+        onChangePage={getCatList}
       />
     </div> 
   );
@@ -43,9 +58,8 @@ const CatList = ({ catList, rows, catTotal, onClickCat, onChangePage }) => {
 
 CatList.propTypes = {
   catList: PropTypes.array,
-  rows: PropTypes.number,
   catTotal: PropTypes.number,
-  onChangePage: PropTypes.func
+  onClickCat: PropTypes.func
 };
  
 export default CatList;
