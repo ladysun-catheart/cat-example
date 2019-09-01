@@ -30,10 +30,7 @@ const CatList = ({ catList, catTotal, onClickCat, saveCatList }) => {
     CatApi.fetchCatList(page, 10)
         .then(res => saveCatList(res.data.catTotalStored, res.data.catList));
   };
-  useEffect(() => {
-    getCatList(1);
-    return () => saveCatList(0, [])
-  }, []);
+  useEffect(() => getCatList(1), []);
   return ( 
     <div>
       <Table striped bordered hover>
