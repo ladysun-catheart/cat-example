@@ -1,6 +1,26 @@
-class Cat {
+const CatSexPrivate = Object.freeze({
+  MALE: {
+    name: 'male',
+    icon: '♂'
+  },
+  FEMALE: {
+    name: 'female',
+    icon: '♀'
+  },
+  UNDEFINED: {
+    name: 'unkwon',
+    icon: '⚲'
+  }
+});
 
-  constructor(id, name, sex, birthday, breed, description) {
+const CatSex = Object.freeze({
+  male: CatSexPrivate.MALE,
+  female: CatSexPrivate.FEMALE,
+  unkwon: CatSexPrivate.UNDEFINED
+});
+
+class Cat {
+  constructor({id, name, sex = CatSex.unkwon, birthday, breed, description}) {
     this.id = id;
     this.name = name;
     this.sex = sex;
@@ -8,7 +28,7 @@ class Cat {
     this.breed = breed;
     this.description = description;
   }
-
 }
 
 export default Cat;
+export { CatSex }
