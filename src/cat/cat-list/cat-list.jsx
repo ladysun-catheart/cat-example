@@ -6,8 +6,7 @@ import CatListPaginator from './cat-list-paginator';
 const CatListRow = ({cat, onClickCat}) => {
   let [styleRow, setStyleRow] = useState({ cursor: 'default'});
   return (
-    <tr 
-      key={cat.id}
+    <tr
       style={styleRow} 
       onClick={() => onClickCat(cat)} 
       onMouseEnter={() => setStyleRow({ cursor: 'pointer'})} 
@@ -30,7 +29,7 @@ const CatList = ({ catList, rows, catTotal, onClickCat, onChangePage }) => {
           </tr>
         </thead>
         <tbody>
-          {catList.map(cat => <CatListRow cat={cat} onClickCat={onClickCat} />)}
+          {catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
         </tbody>
       </Table>
       <CatListPaginator 

@@ -1,2 +1,3 @@
-import CatActions from './cat-actions.jsx';
+import CatActionsConnect from "./connect";
+const CatActions = CatActionsConnect;
 export default CatActions;
