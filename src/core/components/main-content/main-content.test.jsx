@@ -1,10 +1,10 @@
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import store from './core/store/redux/store';
+import store from '../../../core/store/redux/store';
 
 import MainContent from './main-content';
-import { Cat } from "../../../cat";
+import Cat from "../../../cat";
 import Contact from '../../../contact';
 
 import { configure, shallow, mount } from 'enzyme';
