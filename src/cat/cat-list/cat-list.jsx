@@ -41,7 +41,7 @@ const CatList = ({ catList, catTotal, onClickCat, saveCatList }) => {
           </tr>
         </thead>
         <tbody>
-          {catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
+          {catList && catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
         </tbody>
       </Table>
       <CatListPaginator 
@@ -60,3 +60,6 @@ CatList.propTypes = {
 };
  
 export default CatList;
+export {
+  CatListRow
+}
