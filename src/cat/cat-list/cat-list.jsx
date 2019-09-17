@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Table from 'react-bootstrap/Table';
 import CatListPaginator from './cat-list-paginator';
 import CatApi from '../../core/apis/cat-api';
-import { CatActions } from '../../core/store/redux/actions';
 
 const CatListRow = ({cat, onClickCat}) => {
   const [styleRow, setStyleRow] = useState({ cursor: 'default'});
@@ -41,7 +40,7 @@ const CatList = ({ catList, catTotal, onClickCat, saveCatList }) => {
           </tr>
         </thead>
         <tbody>
-          {catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
+          {catList && catList.map(cat => <CatListRow key={cat.id} cat={cat} onClickCat={onClickCat} />)}
         </tbody>
       </Table>
       <CatListPaginator 
@@ -60,3 +59,6 @@ CatList.propTypes = {
 };
  
 export default CatList;
+export {
+  CatListRow
+};

@@ -1,4 +1,3 @@
-import { CatActions } from '../core/store/redux/actions';
 import { connect } from 'react-redux';
 import Cat from "./cat";
 
