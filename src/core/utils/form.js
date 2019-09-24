@@ -30,7 +30,7 @@ const setValueForm = (value, name, stateForm, setStateForm) => {
 };
 
 // Todo Refactor handleSubmitForm
-const handleSubmitForm = (event, validationSchema, stateForm, setStateForm) => {
+const handleSubmitForm = (event, submitFunc, validationSchema, stateForm, setStateForm) => {
     event.preventDefault();
     event.stopPropagation();
     // utils rewind
@@ -38,7 +38,11 @@ const handleSubmitForm = (event, validationSchema, stateForm, setStateForm) => {
         stateForm[key].msgError = '';
     }
     // utils validation
-    validationSchema.validate(stateForm, { abortEarly: false }).catch(valid => {
+    validationSchema.validate(stateForm, { abortEarly: false })
+    .then(() => { 
+        submitFunc() 
+    })
+    .catch(valid => {
         const stateFormAux = { ...stateForm };
         valid.inner.forEach(rawVal => {
             const key = rawVal.path.split('.')[0];
