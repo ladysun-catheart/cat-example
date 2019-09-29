@@ -4,11 +4,13 @@ import { CatActions } from '../../core/store/redux/actions';
 
 const mapStateToProps = state => ({
     catList: state.cat.catListFinded,
-    catTotal: state.cat.catTotalStored
+    catTotal: state.cat.catTotalStored,
+    page: state.cat.page, 
+    rows: state.cat.rows
 });
 const mapDispacthToProps = (dispatch) => ({
     onClickCat: (cat) => dispatch(CatActions.catSelected(cat)),
-    saveCatList: (catTotalStored, catListFinded) => dispatch(CatActions.persistCatList(catTotalStored, catListFinded))
+    saveCatList: (catTotalStored, catListFinded, page, rows) => dispatch(CatActions.persistCatList(catTotalStored, catListFinded, page, rows))
 });
 const CatListConnect = connect(mapStateToProps, mapDispacthToProps)(CatList);
 
