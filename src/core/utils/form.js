@@ -39,8 +39,11 @@ const handleSubmitForm = (event, submitFunc, validationSchema, stateForm, setSta
     }
     // utils validation
     validationSchema.validate(stateForm, { abortEarly: false })
-    .then(() => { 
-        submitFunc() 
+    .then(() => {
+        const formValues = {};
+        for (const key in stateForm)
+            formValues[key] = stateForm[key].value;
+        submitFunc(formValues);
     })
     .catch(valid => {
         const stateFormAux = { ...stateForm };
