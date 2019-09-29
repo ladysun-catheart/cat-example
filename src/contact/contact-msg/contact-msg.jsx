@@ -12,7 +12,7 @@ const ContactMsg = ({ msgTitle, msgContent, formContent, reloadForm }) => (
         <Container>
             <h1>{msgTitle}</h1>
             <p>{msgContent}</p>
-            <ContactValueForm contact={formContent} />
+            {formContent && <ContactValueForm contact={formContent} />}
             <Button onClick={reloadForm}>Enviar otro mensaje</Button>
         </Container>
     </Jumbotron>
