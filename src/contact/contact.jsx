@@ -1,55 +1,32 @@
-
 import React, { useState } from 'react';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/Button';
-import * as yup from 'yup';
+import {
+  emptyMsg,
+  successMsg,
+  errorMsg
+} from './msgs';
+import ContactMsg from './contact-msg';
+import ContactForm from './contact-form';
+import ContactApi from '../core/apis/contact-api';
 
 const Contact = () => {
-  const [contactInfo, setContactInfo] = useState({
-    user: '',
-    mail: '',
-    content: ''
-  });
-  const validateSchema = yup.object().shape({
-    user: yup.string().required(),
-    mail: yup.string().email().required(),
-    content: yup.string().required()
-  });
-  const setValueForm = (value, name) => setContactInfo({ ...contactInfo, [name]: value });
-  const handleSubmit = (event) => {
-    validateSchema.isValid(contactInfo).then(valid => console.log(`Is valid?: ${valid}`));
-    event.preventDefault();
-    event.stopPropagation();
+  const [msg, setMsg] = useState(emptyMsg);
+  const handleOnSend = (contact) => {
+    ContactApi.insertContact(contact)
+      .then((res) => {
+        const contact = { ...res.data };
+        delete contact.id;
+        setMsg({ ...successMsg, contact })
+      })
+      .catch(() => setMsg({...errorMsg}));
   };
-  return ( 
-    <Form noValidate onSubmit={handleSubmit}>
-      <Form.Group>
-        <Form.Control 
-          type="text" 
-          placeholder="User" 
-          value={contactInfo.user} 
-          onChange={(event) => setValueForm(event.target.value, 'user')}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control 
-          type="mail" 
-          placeholder="Mail contact"
-          value={contactInfo.mail} 
-          onChange={(event) => setValueForm(event.target.value, 'mail')}
-        />
-      </Form.Group>
-      <Form.Group>
-        <Form.Control 
-          as="textarea" 
-          placeholder="What do you want?"
-          value={contactInfo.content} 
-          onChange={(event) => setValueForm(event.target.value, 'content')}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">Enviar</Button>
-    </Form>
-  );
-}
+  return msg.flag ? 
+    <ContactMsg 
+      msgTitle={msg.title} 
+      msgContent={msg.content}
+      formContent={msg.contact}
+      reloadForm={() => setMsg(emptyMsg)} />
+    : <ContactForm 
+      onSend={handleOnSend} />;
+};
  
 export default Contact;
