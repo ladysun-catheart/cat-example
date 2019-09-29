@@ -10,10 +10,12 @@ const catSelected = (cat) => ({
   cat
 });
 
-const persistCatList = (catTotalStored, catListFinded) => ({
+const persistCatList = (catTotalStored, catListFinded, page, rows) => ({
   type: actions.SUCCESS_FILL_CAT_LIST,
   catTotalStored,
-  catListFinded
+  catListFinded,
+  page,
+  rows
 });
 
 /* const selectCat = (idCat) => (dispatch) => CatApi.fetchCatById(idCat)
