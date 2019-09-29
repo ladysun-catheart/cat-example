@@ -32,14 +32,14 @@ const ModalType = {
 };
 Object.freeze(ModalType);
 
-const Modal = ({type, title, children: body, acept, cancel, confirm, close}) => (
+const Modal = ({modalType, title, children: body, acept, cancel, confirm, close}) => (
     <Modal.Dialog>
         <Modal.Header closeButton>
-            <Modal.Title><FontAwesomeIcon icon={type.icon} /> {title}</Modal.Title>
+            <Modal.Title><FontAwesomeIcon icon={modalType.icon} /> {title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>{body}</Modal.Body>
         <Modal.Footer>
-            {type.buttons({acept, cancel, confirm, close})}
+            {modalType.buttons({acept, cancel, confirm, close})}
         </Modal.Footer>
     </Modal.Dialog>
 );

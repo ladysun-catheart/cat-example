@@ -3,6 +3,7 @@ import { Provider } from 'react-redux';
 import store from './core/store/redux/store';
 import TopBar from './core/components/top-bar';
 import MainContent from './core/components/main-content';
+import { GlobalModal } from './core/components/modal';
 import { BrowserRouter as Router } from "react-router-dom";
 
 const App = () => (
@@ -10,6 +11,7 @@ const App = () => (
     <TopBar />
     <div style={{marginTop: '20px'}}>
       <MainContent />
+      <GlobalModal />
     </div>
   </Router>
 );
