@@ -13,7 +13,7 @@ const initialState = {
 };
 
 function reducer(state = initialState, { type, modalType, title, body, acept, cancel, confirm, close }) {
-    let newState;
+    let newState = {};
     switch (type) {
         case ModalActions.OPEN_MODAL:
             newState = { ...state, isVisible: true, modalType, title, body, acept, cancel, confirm, close };

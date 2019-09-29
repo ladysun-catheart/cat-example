@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Button from 'react-bootstrap/Button';
+import { FontAwesomeIcon } from "react-fontawesome";
 
 const ModalType = {
     INFO: {
@@ -32,7 +33,7 @@ const ModalType = {
 };
 Object.freeze(ModalType);
 
-const Modal = ({modalType, title, children: body, acept, cancel, confirm, close}) => (
+const CustomModal = ({modalType, title, children: body, acept, cancel, confirm, close}) => (
     <Modal.Dialog>
         <Modal.Header closeButton>
             <Modal.Title><FontAwesomeIcon icon={modalType.icon} /> {title}</Modal.Title>
@@ -53,7 +54,7 @@ Modal.propTypes = {
     close: PropTypes.func
 }
 
-export default Modal;
+export default CustomModal;
 export {
     ModalType,
 };

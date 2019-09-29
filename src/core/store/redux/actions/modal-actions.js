@@ -10,6 +10,6 @@ const openModal = (config) => ({
 });
 
 export {
-    actions,
+    ModalActions,
     openModal
 };
