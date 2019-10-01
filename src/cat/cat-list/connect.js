@@ -1,6 +1,8 @@
 import { connect } from 'react-redux';
 import CatList from './cat-list';
 import { CatActions } from '../../core/store/redux/actions';
+import { ModalActions, page } from '../../core/store/redux/actions';
+import { errorModal } from './modals';
 
 const mapStateToProps = state => ({
     catList: state.cat.catListFinded,
