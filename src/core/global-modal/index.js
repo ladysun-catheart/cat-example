@@ -1,7 +1,7 @@
 import GlobalModalService from './global-modal-service';
-import GlobalModal from './global-modal';
+import GlobalModalCreator from './global-modal-creator';
 
 export { 
     GlobalModalService,
-    GlobalModal
+    GlobalModalCreator
 };

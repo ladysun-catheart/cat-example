@@ -29,9 +29,5 @@ Modal.propTypes = {
     confirm: PropTypes.func,
     close: PropTypes.func
 };
-const ModalPropTypes = Modal.propTypes;
 
 export default CustomModal;
-export {
-    ModalPropTypes
-};

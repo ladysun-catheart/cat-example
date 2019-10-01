@@ -4,10 +4,11 @@ class GlobalModalService {
     config = Symbol('config');
     internalConfig = Symbol('internalConfig');
 
-    constructor(config) {
+    constructor(config, propsModal) {
         this[this.config] = config;
         this[this.internalConfig] = this.createInternalConfig(config);
         this.observer = new BehaviorSubject(false);
+        this.propsModal = propsModal;
     }
 
     //todo optimize
@@ -40,10 +41,13 @@ class GlobalModalService {
 
     updateInternalConfigCheck(section, check, info) {
         const checkList = this.internalConfig[section].checkList
-        const check = checkList[check];
-        check.isChecked = true;
-        check.info = check.info || info;
-        canShowPopUp(checkList) && this.observer.next(true);
+        const checkAux = {
+            ...checkList[check],
+            isChecked: true,
+            info: checkList[check].info || info
+        };
+        checkList[check] = checkAux;
+        this.canShowPopUp(checkList) && this.observer.next(this.propsModal);
     }
 
     canShowPopUp(checkList) {
