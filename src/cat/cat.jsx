@@ -1,10 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Row, Col } from 'react-bootstrap';
 import CatInfo from './cat-info';
 import CatList from './cat-list';
 import CatActions from './cat-actions';
+import { errorGlobalModalService } from '../core/config/global-modal';
 
 const Cat = () => {
+  useEffect(() => {
+    errorGlobalModalService.updateGlobalModalProps({
+      title: 'Cat List error',
+      close: () => { }, 
+      confirm: () => { },
+      closeModal: () => { 
+        errorGlobalModalService.closeModal() 
+      },
+    });
+    // return () => errorGlobalModalService.resetInternalConfigCheck('CAT_SECTION');
+  }, []);
   return(
     <>
       <Row>

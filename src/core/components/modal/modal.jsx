@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const CustomModal = ({isVisible, modalType, title, body, acept, cancel, confirm, close, closeModal}) => (
+const emptyFunc = () => {};
+
+const CustomModal = ({isVisible, modalType, title, body, 
+    acept, cancel, confirm, close, closeModal}) => (
     <Modal 
         show={isVisible}
         onHide={() => {

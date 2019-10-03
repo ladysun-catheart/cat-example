@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const GlobalModalCreator = (ModalComponent) => {
+const GlobalModalCreator = (ModalComponent, modalProps01) => {
 
     const ModalWrapper = ({ observer }) => {
-        const [modalProps, setModalProps] = useState({});
-        // observer.subscribe(modalProps => setModalProps(modalProps));
-        return <ModalComponent {...modalProps} />;
+        const [modalProps, setModalProps] = useState({...modalProps01});
+        observer.subscribe(newModalProps => setModalProps({...modalProps, ...newModalProps}));
+        return modalProps.isVisible ? <ModalComponent {...modalProps} /> : null;
     };
 
     ModalWrapper.propTypes = {

@@ -5,9 +5,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './core/store/redux/store';
 import {
-  globalModalService,
-  GlobalModal
-} from './core/global-modal/config';
+  errorGlobalModalService,
+  ErrorGlobalModal
+} from './core/config/global-modal';
 
 const App = () => (
   <Router>
@@ -21,10 +21,7 @@ const App = () => (
 const AppConnected = () => (
   <Provider store={store}>
     <App />
-    <GlobalModal
-      observer={globalModalService.observer}
-      {...globalModalService.propsModal}
-    />
+    <ErrorGlobalModal observer={errorGlobalModalService.observer} />
   </Provider>
 );
 

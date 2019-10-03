@@ -4,13 +4,15 @@ import Table from 'react-bootstrap/Table';
 import CatListRow from './cat-list-row';
 import CatListPaginator from './cat-list-paginator';
 import CatApi from '../../core/apis/cat-api';
+import { errorGlobalModalService } from '../../core/config/global-modal';
 
 const CatList = ({ catList, catTotal, onClickCat, saveCatList, page, rows }) => {
   const getCatList = (pageSelected) => {
     CatApi.fetchCatList(pageSelected, rows)
-        .then(res => saveCatList(res.data.catTotalStored, res.data.catList, pageSelected, rows));
+        .then(res => saveCatList(res.data.catTotalStored, res.data.catList, pageSelected, rows))
+        .catch(() => errorGlobalModalService.updateInternalConfigCheck('CAT_SECTION', 'CAT_LIST', 'Hubo un error, vuelvalo a intentar más tarde'));
   };
-  useEffect(() => getCatList(page), []);
+  useEffect(() => getCatList(page));
   return ( 
     <div>
       <Table striped bordered hover>

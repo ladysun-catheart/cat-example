@@ -1,14 +1,16 @@
-import { BehaviorSubject } from 'rxjs';
+import React from 'react';
+import { Subject } from 'rxjs';
 
 class GlobalModalService {
     config = Symbol('config');
     internalConfig = Symbol('internalConfig');
+    propsModal = Symbol('propsModal');
 
-    constructor(config, propsModal) {
+    constructor(config) {
         this[this.config] = config;
         this[this.internalConfig] = this.createInternalConfig(config);
-        this.observer = new BehaviorSubject(false);
-        this.propsModal = propsModal;
+        this.observer = new Subject({});
+        this[this.propsModal] = {};
     }
 
     //todo optimize
@@ -27,48 +29,46 @@ class GlobalModalService {
     }
 
     resetInternalConfigCheck(section) {
-        const checkList = this.internalConfig[section].checkList;
-        const checkListOri = this.config[section].checkList;
+        const checkList = this[this.internalConfig][section].checkList;
+        const checkListOri = this[this.config][section].checkList;
         for (const checkKey in checkList) {
             const resetKey = {
                 ...checkList[checkKey],
                 isChecked: false,
-                info: checkListOri[checkKey].info
+                // info: checkListOri[checkKey].info
             };
             checkList[checkKey] = resetKey;
         }
     }
 
     updateInternalConfigCheck(section, check, info) {
-        const checkList = this.internalConfig[section].checkList
+        const checkList = this[this.internalConfig][section].checkList
         const checkAux = {
             ...checkList[check],
             isChecked: true,
-            info: checkList[check].info || info
+            info: info
         };
         checkList[check] = checkAux;
-        this.canShowPopUp(checkList) && this.observer.next(this.propsModal);
+        this.canShowPopUp(checkList) && this.observer.next({...this[this.propsModal], body: this.getBodyModal(checkList), isVisible: true});
     }
 
     canShowPopUp(checkList) {
         return Object.keys(checkList).every(checkKey => checkList[checkKey].isChecked);
     }
 
+    getBodyModal(checkList) {
+        return Object.keys(checkList).map(checkKey => <p>{checkList[checkKey].info}</p>);
+    }
+
+    closeModal() {
+        this.observer.next({...this[this.propsModal], isVisible: false});
+    }
+
+    updateGlobalModalProps(newProps) {
+        this[this.propsModal] = {...this[this.propsModal], ...newProps};
+        // this.observer.next({...this[this.propsModal], isVisible: true});
+    }
+
 }
 
 export default GlobalModalService;
-
-/* const config = {
-    PRE_SECTION: {
-        isActive: false,
-    },
-    CAT_SECTION: { 
-        isActive: false,
-        checkList: {
-            CAT_LIST: { info: 'this section is wrong' }
-        }
-    },
-    CONTACT_SECTION: {
-        isActive: false,
-    }
-}; */
