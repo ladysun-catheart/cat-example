@@ -1,7 +1,9 @@
 import React from 'react';
+import GlobalModalCreator from './global-modal-creator';
 import { Subject } from 'rxjs';
 
 class GlobalModalService {
+    //Private props
     config = Symbol('config');
     internalConfig = Symbol('internalConfig');
     propsModal = Symbol('propsModal');
@@ -10,19 +12,18 @@ class GlobalModalService {
         this[this.config] = config;
         this[this.internalConfig] = this.createInternalConfig(config);
         this.observer = new Subject({});
+        this.BodyComponent = null;
         this[this.propsModal] = {};
     }
 
-    //todo optimize
     createInternalConfig(config) {
         const internalConfig = {};
         for (const sectionKey in config) {
-            const section = { ...config[sectionKey] };
-            section.isActive = false;
-            for (const checkKey in section.checkList) {
-                const key = { ...section.checkList[checkKey], isChecked: false };
-                section.checkList[checkKey] = key;
-            }
+            const section = { isActive: false, checkList: {} };
+            config[sectionKey].checkList && config[sectionKey].checkList.forEach(check => {
+                const key = { isChecked: false };
+                section.checkList[check] = key;
+            });
             internalConfig[sectionKey] = section;
         }
         return internalConfig;
@@ -30,18 +31,16 @@ class GlobalModalService {
 
     resetInternalConfigCheck(section) {
         const checkList = this[this.internalConfig][section].checkList;
-        const checkListOri = this[this.config][section].checkList;
-        for (const checkKey in checkList) {
+        checkList && checkList.forEach(check => {
             const resetKey = {
-                ...checkList[checkKey],
+                ...check,
                 isChecked: false,
-                // info: checkListOri[checkKey].info
             };
-            checkList[checkKey] = resetKey;
-        }
+            check = resetKey;
+        });
     }
 
-    updateInternalConfigCheck(section, check, info) {
+    updateChecking(section, check, info) {
         const checkList = this[this.internalConfig][section].checkList
         const checkAux = {
             ...checkList[check],
@@ -49,7 +48,11 @@ class GlobalModalService {
             info: info
         };
         checkList[check] = checkAux;
-        this.canShowPopUp(checkList) && this.observer.next({...this[this.propsModal], body: this.getBodyModal(checkList), isVisible: true});
+        this.canShowPopUp(checkList) && this.observer.next({
+            ...this[this.propsModal],
+            body: this.getBodyModal(checkList),
+            isVisible: true
+        });
     }
 
     canShowPopUp(checkList) {
@@ -57,16 +60,27 @@ class GlobalModalService {
     }
 
     getBodyModal(checkList) {
-        return Object.keys(checkList).map(checkKey => <p>{checkList[checkKey].info}</p>);
+        const bodyCompo = this[this.propsModal].body;
+        const infoList = Object.keys(checkList).map(checkKey => checkList[checkKey].info);
+        return bodyCompo ?
+            () => bodyCompo({ checkList: infoList }) :
+            () => (
+                <ul>
+                    {infoList.map(info => <li>{info}</li>)}
+                </ul>
+            );
     }
 
     closeModal() {
-        this.observer.next({...this[this.propsModal], isVisible: false});
+        this.observer.next({ ...this[this.propsModal], isVisible: false });
     }
 
     updateGlobalModalProps(newProps) {
-        this[this.propsModal] = {...this[this.propsModal], ...newProps};
-        // this.observer.next({...this[this.propsModal], isVisible: true});
+        this[this.propsModal] = { ...this[this.propsModal], ...newProps };
+    }
+
+    getGlobalModal(Modal, configModal) {
+        return GlobalModalCreator(Modal, this.observer, configModal);
     }
 
 }

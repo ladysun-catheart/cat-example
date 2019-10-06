@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const emptyFunc = () => {};
 
-const CustomModal = ({isVisible, modalType, title, body, 
+const CustomModal = ({isVisible, modalType, title, children, 
     acept, cancel, confirm, close, closeModal}) => (
     <Modal 
         show={isVisible}
@@ -17,7 +17,7 @@ const CustomModal = ({isVisible, modalType, title, body,
         <Modal.Header closeButton>
             <Modal.Title><FontAwesomeIcon icon={modalType && modalType.icon} /> {title}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>{body}</Modal.Body>
+        <Modal.Body>{children}</Modal.Body>
         <Modal.Footer>
             {modalType && modalType.buttons({acept, cancel, confirm, close}, closeModal)}
         </Modal.Footer>

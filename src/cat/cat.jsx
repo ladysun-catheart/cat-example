@@ -11,11 +11,9 @@ const Cat = () => {
       title: 'Cat List error',
       close: () => { }, 
       confirm: () => { },
-      closeModal: () => { 
-        errorGlobalModalService.closeModal() 
-      },
+      closeModal: () => errorGlobalModalService.closeModal(),
+      // body: ({checkList}) => <p>Número de errores: {checkList.length}</p>
     });
-    // return () => errorGlobalModalService.resetInternalConfigCheck('CAT_SECTION');
   }, []);
   return(
     <>

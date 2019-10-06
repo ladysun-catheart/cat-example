@@ -10,7 +10,7 @@ const CatList = ({ catList, catTotal, onClickCat, saveCatList, page, rows }) => 
   const getCatList = (pageSelected) => {
     CatApi.fetchCatList(pageSelected, rows)
         .then(res => saveCatList(res.data.catTotalStored, res.data.catList, pageSelected, rows))
-        .catch(() => errorGlobalModalService.updateInternalConfigCheck('CAT_SECTION', 'CAT_LIST', 'Hubo un error, vuelvalo a intentar más tarde'));
+        .catch(() => errorGlobalModalService.updateChecking('CAT_SECTION', 'CAT_LIST', 'Hubo un error, vuelvalo a intentar más tarde'));
   };
   useEffect(() => getCatList(page));
   return ( 
