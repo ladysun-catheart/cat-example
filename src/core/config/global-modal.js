@@ -1,5 +1,5 @@
 import Modal, { ModalType } from '../components/modal';
-import GlobalModalService from '../global-modal/global-modal-service';
+import GlobalModalService from '../components/global-modal/global-modal-service';
 
 const config = {
     PRE_SECTION: {},

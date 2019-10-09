@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 
-const CatListRow = ({ cat, onClickCat }) => {
+const TableRow = ({ columnList, data, onClick }) => {
     const [styleRow, setStyleRow] = useState({ cursor: 'default' });
     return (
         <tr
             style={styleRow}
-            onClick={() => onClickCat(cat)}
+            onClick={() => onClick(data)}
             onMouseEnter={() => setStyleRow({ cursor: 'pointer' })}
             onMouseLeave={() => setStyleRow({ cursor: 'default' })}
         >
-            <td>{cat.id}</td>
-            <td>{cat.name}</td>
+            { columnList.map(column => <td>{ data[column.id] }</td>) }
         </tr>
     );
 };
 
-CatListRow.propTypes = {
-    cat: PropTypes.object,
-    onClickCat: PropTypes.func
+TableRow.propTypes = {
+    columnList: PropTypes.array,
+    data: PropTypes.object,
+    onClick: PropTypes.func
 };
 
-export default CatListRow;
+export default TableRow;
