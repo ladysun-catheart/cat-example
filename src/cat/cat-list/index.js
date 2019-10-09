@@ -1,3 +1,2 @@
-import CatListConnect from './connect.js';
-const CatList = CatListConnect;
+import CatList from './cat-list';
 export default CatList;
