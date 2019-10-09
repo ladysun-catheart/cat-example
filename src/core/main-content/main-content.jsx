@@ -1,6 +1,6 @@
 import React from 'react';
-import Cat from '../../../cat';
-import Contact from '../../../contact';
+import Cat from '../../cat';
+import Contact from '../../contact';
 import Container from 'react-bootstrap/Container';
 import { Route, Switch } from "react-router-dom";
 
