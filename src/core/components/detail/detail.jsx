@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 import DetailFilled from './detail-filled';
 import DetailEmpty from './detail-empty';
 
-const Detail = ({ isAvailable, title, subtitle, description, emptyTitle, emptyText }) => (
+const Detail = ({ isAvailable, actionList, title, subtitle, description, emptyTitle, emptyText }) => (
   isAvailable ? (
     <DetailFilled
+      actionList={actionList}
       title={title}
       subtitle={subtitle}
       description={description}
@@ -18,6 +19,7 @@ const Detail = ({ isAvailable, title, subtitle, description, emptyTitle, emptyTe
 
 DetailFilled.propTypes = {
   isAvailable: PropTypes.boolean,
+  actionList: PropTypes.array,
   title: PropTypes.oneOfType([
     PropTypes.elementType,
     PropTypes.string
