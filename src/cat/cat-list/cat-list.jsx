@@ -3,12 +3,18 @@ import PropTypes from 'prop-types';
 import Table from '../../core/components/table';
 
 const columnList = [
-  {id: 'id', label: 'Id'},
-  {id: 'name', label: 'Nombre'},
+  { id: 'id', label: 'Id' },
+  { id: 'name', label: 'Nombre' },
 ];
+
+const actionList = (cat) => ([
+  { name: 'Modificar', handlerClick: () => { } },
+  { name: 'Borrar', handlerClick: () => { } },
+]);
 
 const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows }) => (
   <Table
+    actionList={actionList}
     columnList={columnList}
     dataList={catList}
     dataTotal={catTotal}
