@@ -4,7 +4,7 @@ import contact from './contact-reducer';
 
 const reducers = combineReducers({
   cat,
-  contact,
+  contact
 });
 
 export default reducers;

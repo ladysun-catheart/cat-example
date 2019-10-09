@@ -4,4 +4,4 @@ import ContactActions from './contact-actions';
 export {
     CatActions,
     ContactActions
-}
+};

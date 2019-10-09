@@ -1,14 +1,15 @@
 import React from 'react';
-import { Provider } from 'react-redux';
-import store from './core/store/redux/store';
 import TopBar from './core/components/top-bar';
 import MainContent from './core/components/main-content';
 import { BrowserRouter as Router } from "react-router-dom";
+import { Provider } from 'react-redux';
+import store from './core/store/redux/store';
+import { ErrorGlobalModal } from './core/config/global-modal';
 
 const App = () => (
   <Router>
     <TopBar />
-    <div style={{marginTop: '20px'}}>
+    <div style={{ marginTop: '20px' }}>
       <MainContent />
     </div>
   </Router>
@@ -17,6 +18,7 @@ const App = () => (
 const AppConnected = () => (
   <Provider store={store}>
     <App />
+    <ErrorGlobalModal />
   </Provider>
 );
 

@@ -1,4 +1,3 @@
-import Cat, {CatSex} from './../../../model/Cat';
 import CatActions from './../actions/cat-actions';
 
 const initialState = {
@@ -9,17 +8,17 @@ const initialState = {
   catTotalStored: 0,
 };
 
-function reducer(state = initialState, {type, cat, catTotalStored, catListFinded, page, rows}) {
+function reducer(state = initialState, { type, cat, catTotalStored, catListFinded, page, rows }) {
   let nextState = {};
-  switch(type) {
+  switch (type) {
     case CatActions.actions.SUCCESS_SELECT_CAT:
-      nextState = {...state, catSelected: cat};
+      nextState = { ...state, catSelected: cat };
       break;
     case CatActions.actions.SUCCESS_FILL_CAT_LIST:
-      nextState = {...state, catTotalStored, catListFinded, page, rows};
+      nextState = { ...state, catTotalStored, catListFinded, page, rows };
       break;
     default:
-      nextState = {...state};
+      nextState = { ...state };
   }
   return nextState;
 }
