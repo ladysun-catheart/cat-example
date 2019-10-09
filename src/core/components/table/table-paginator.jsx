@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import Pagination from 'react-bootstrap/Pagination';
 
-const CatListPaginator = ({ page, rows, catTotal, onChangePage }) => {
+const TablePaginator = ({ page, rows, dataTotal, onChangePage }) => {
   const [actualPage, setActualPage] = useState(page);
-  const totalPages = catTotal / rows; 
+  const totalPages = dataTotal / rows; 
   const isDisablePrevFirst = () => actualPage === 1;
   const isDisableNextLast = () => actualPage === totalPages;
   const getPages = () => [];
@@ -40,11 +40,11 @@ const CatListPaginator = ({ page, rows, catTotal, onChangePage }) => {
   );
 };
 
-CatListPaginator.propTypes = {
+TablePaginator.propTypes = {
     page: PropTypes.number, 
     rows: PropTypes.number,
-    catTotal: PropTypes.number,
+    dataTotal: PropTypes.number,
     onChangePage: PropTypes.func
 }
  
-export default CatListPaginator;
+export default TablePaginator;
