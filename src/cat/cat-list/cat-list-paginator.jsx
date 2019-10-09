@@ -10,7 +10,7 @@ const CatListPaginator = ({ page, rows, catTotal, onChangePage }) => {
   const getPages = () => [];
   const handlerPagItemClick = (page) => {
     setActualPage(page);
-    onChangePage(page)
+    onChangePage(page, rows);
   };
   return(
     <Pagination>
