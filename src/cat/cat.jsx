@@ -10,7 +10,7 @@ import CatToolbar from './cat-toolbar';
 
 const globalModalConfig = () => (
   errorGlobalModalService.updateGlobalModalProps({
-    title: 'Cat List error',
+    title: 'Cat list error',
     close: () => { },
     confirm: () => { },
     closeModal: () => errorGlobalModalService.closeModal(),
@@ -18,12 +18,21 @@ const globalModalConfig = () => (
   })
 );
 
+const getCatList = (pageSelected, rows, saveCatList) => {
+  CatApi.fetchCatList(pageSelected, rows)
+    .then(res => saveCatList(res.data.catTotalStored, res.data.catList, pageSelected, rows))
+    .catch(() => errorGlobalModalService.updateChecking(
+      'CAT_SECTION',
+      'CAT_LIST',
+      'Hubo un error, vuelvalo a intentar más tarde'
+    ));
+};
+
+const searchCat = searchtext => {
+
+};
+
 const Cat = ({ saveCatList, onClickCat, cat, catList, catTotal, page, rows }) => {
-  const getCatList = (pageSelected, rows) => {
-    CatApi.fetchCatList(pageSelected, rows)
-      .then(res => saveCatList(res.data.catTotalStored, res.data.catList, pageSelected, rows))
-      .catch(() => errorGlobalModalService.updateChecking('CAT_SECTION', 'CAT_LIST', 'Hubo un error, vuelvalo a intentar más tarde'));
-  };
   useEffect(() => {
     globalModalConfig();
     getCatList(page, rows);
@@ -31,10 +40,7 @@ const Cat = ({ saveCatList, onClickCat, cat, catList, catTotal, page, rows }) =>
   return (
     <>
       <Row>
-        <CatToolbar
-          onClickCreate={() => {}}
-          onClickSearch={() => {}}
-        />
+        <CatToolbar onClickSearch={searchCat} />
       </Row>
       <Row>
         <Col>
@@ -42,7 +48,7 @@ const Cat = ({ saveCatList, onClickCat, cat, catList, catTotal, page, rows }) =>
         </Col>
         <Col>
           <CatList
-            onChangePage={getCatList}
+            onChangePage={(pageSelected, rows) => getCatList(pageSelected, rows, saveCatList)}
             onClickCat={onClickCat}
             catList={catList}
             catTotal={catTotal}
