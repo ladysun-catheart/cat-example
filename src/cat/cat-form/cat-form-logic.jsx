@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import CatFormStructure from './cat-form-structure';
 
-const CatFormLogic = props => {
+const CatFormLogic = ({ children, btnName, cat }) => {
   const validationSchema = {
     name: yup.string().required('The name is required'),
     sex: yup.string().required('The sex is required'),
@@ -14,12 +13,12 @@ const CatFormLogic = props => {
   return (
     <Formik
       enableReinitialize
-      initialValues={props.cat}
+      initialValues={cat}
       validationSchema={validationSchema}
       onSubmit={(values, actions) => {
         console.log('submit buttons')
       }}
-      render={(propsFormik) => <CatFormStructure {...propsFormik} {...props} />}
+      render={(propsFormik) => React.cloneElement(children, { ...propsFormik, btnName })}
     />
   );
 };

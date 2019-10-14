@@ -1,10 +1,10 @@
 import React from 'react';
 import CatForm from '../cat-form';
 
-const CatCreate = props => {
+const CatCreate = () => {
     const handlerSend = () => {};
     return (
-        <CatForm {...props} btnName={'Insert'} />
+        <CatForm btnName={'Insert'} />
     );
 }
 

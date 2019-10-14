@@ -1,4 +1,3 @@
-import CatFormLogic from "./cat-form-logic";
-const CatForm = CatFormLogic;
+import CatForm from './cat-form';
 
 export default CatForm;

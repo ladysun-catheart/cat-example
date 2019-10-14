@@ -2,7 +2,7 @@ import React, { useState, useLayoutEffect } from 'react';
 import CatForm from '../cat-form';
 import CatApi from '../../core/apis/cat-api';
 
-const CatUpdate = props => {
+const CatUpdate = ({ idCat }) => {
     const [catState, setCatState] = useState({
         name: '',
         birthday: '',
@@ -11,11 +11,11 @@ const CatUpdate = props => {
     });
     const handlerSend = () => { };
     useLayoutEffect(() => {
-        CatApi.fetchCatById(1)
-        .then(res => setCatState(res.data));
+        CatApi.fetchCatById(idCat)
+            .then(res => setCatState(res.data));
     }, []);
     return (
-        <CatForm {...props} btnName={'Update'} cat={catState} />
+        <CatForm btnName={'Update'} cat={catState} />
     );
 }
 
