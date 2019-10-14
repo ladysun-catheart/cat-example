@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import { useHistory } from "react-router-dom";
 import { Col, Button, Form, InputGroup } from 'react-bootstrap';
 
-const CatToolbar = ({ onClickSearch }) => {
+const CatToolbar = ({ onClickSearch, goToCatCreate }) => {
     // const history = useHistory();
     return (
         <>
-            <Col><Button onClick={() => {}}>Insert new cat</Button></Col>
+            <Col><Button onClick={() => goToCatCreate()}>Insert new cat</Button></Col>
             <Col>
                 <InputGroup className="mb-3">
                     <InputGroup.Prepend>
@@ -21,7 +21,8 @@ const CatToolbar = ({ onClickSearch }) => {
 };
 
 CatToolbar.propTypes = {
-    onClickSearch: PropTypes.func
+    onClickSearch: PropTypes.func,
+    goToCatCreate: PropTypes.func
 };
 
 export default CatToolbar;

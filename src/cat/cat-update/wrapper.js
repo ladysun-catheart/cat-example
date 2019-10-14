@@ -2,9 +2,9 @@ import React from 'react';
 import { useParams } from 'react-router';
 import CatUpdate from './cat-update';
 
-const CatUpdateWrapper = () => {
+const CatUpdateWrapper = props => {
     const { idCat } = useParams();
-    return <CatUpdate idCat={idCat} />;
+    return <CatUpdate {...props} idCat={idCat} />;
 };
 
 export default CatUpdateWrapper;

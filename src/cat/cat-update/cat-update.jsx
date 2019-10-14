@@ -13,8 +13,8 @@ const CatUpdate = ({ idCat }) => {
     const handlerSend = () => { };
     useLayoutEffect(() => {
         CatApi.fetchCatById(idCat)
-            .then(res => setCatState({ 
-                ...res.data, 
+            .then(res => setCatState({
+                ...res.data,
                 birthday: moment(res.data.birthday).format('YYYY-MM-DD')
             }));
     }, []);
