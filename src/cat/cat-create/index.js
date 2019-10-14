@@ -1,3 +1,8 @@
 import CatCreate from "./cat-create";
+import CatCreateWrapper from "./wrapper";
 
-export default CatCreate;
+export default CatCreateWrapper;
+export {
+    CatCreate,
+    CatCreateWrapper
+};

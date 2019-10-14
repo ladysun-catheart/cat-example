@@ -1,9 +1,12 @@
 import React from 'react';
 import CatForm from '../cat-form';
+import CatApi from '../../core/apis/cat-api';
 
-const CatCreate = () => {
+const CatCreate = ({ goToCatList }) => {
     const handlerSubmit = newCat => {
-        console.log(newCat);
+        CatApi.createCat(newCat)
+            .then(res => goToCatList())
+            .catch(err => console.log(err));
     };
     return (
         <CatForm btnName={'Insert'} onSubmit={handlerSubmit} />

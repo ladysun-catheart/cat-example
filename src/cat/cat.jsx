@@ -35,7 +35,7 @@ const searchCat = searchtext => {
 const Cat = ({ saveCatList, onClickCat, cat, catList, catTotal, page, rows }) => {
   useEffect(() => {
     globalModalConfig();
-    getCatList(page, rows);
+    getCatList(page, rows, saveCatList);
   }, []);
   return (
     <>

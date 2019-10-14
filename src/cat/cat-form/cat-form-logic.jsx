@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
+import * as moment from 'moment';
 
 const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
   const validationSchema = yup.object().shape({
@@ -10,6 +11,10 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
     birthday: yup.date().required('The birthday is required'),
     description: yup.string().required('The description is required')
   });
+  const handlerSubmit = (cat, actions) => {
+    const catParse = { ...cat, birthday: moment(cat.birthday, 'YYYY-MM-DD').valueOf() };
+    onSubmit(catParse, actions.setErrors);
+  }
   return (
     <Formik
       enableReinitialize
@@ -17,18 +22,16 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
       validateOnBlur
       initialValues={cat}
       validationSchema={validationSchema}
-      onSubmit={(values, actions) => {
-        actions.setSubmitting(false);
-        onSubmit(values, actions.setErrors);
-      }}
+      onSubmit={handlerSubmit}
       render={(propsFormik) => React.cloneElement(children, { ...propsFormik, btnName })}
     />
   );
 };
 
 CatFormLogic.propTypes = {
+  btnName: PropTypes.string,
   cat: PropTypes.object,
-  btnName: PropTypes.func
+  onSubmit: PropTypes.func
 };
 
 export default CatFormLogic;

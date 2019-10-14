@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Row, Col, Form, Button } from 'react-bootstrap';
 
 const CatFormStructure = ({
@@ -66,5 +67,16 @@ const CatFormStructure = ({
     </Form>
   );
 }
+
+CatFormStructure.propTypes = {
+  btnName: PropTypes.string,
+  values: PropTypes.object,
+  errors: PropTypes.object,
+  touched: PropTypes.object,
+  handleBlur: PropTypes.func,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  isSubmitting: PropTypes.bool
+};
 
 export default CatFormStructure;
