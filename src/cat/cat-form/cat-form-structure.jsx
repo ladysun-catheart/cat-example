@@ -16,7 +16,7 @@ const CatFormStructure = ({
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Nombre</Form.Label>
         <Col sm={10}>
-          <Form.Control type="text" id="name" onChange={handleChange} onBlur={handleBlur} defaultValue={values.name} />
+          <Form.Control type="text" id="name" onChange={handleChange} onBlur={handleBlur} value={values.name} />
           <Form.Text className="text-muted">
             {errors.name && touched.name && errors.name}
           </Form.Text>
@@ -25,7 +25,7 @@ const CatFormStructure = ({
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Birthday</Form.Label>
         <Col sm={10}>
-          <Form.Control type="date" id="birthday" onChange={handleChange} onBlur={handleBlur} />
+          <Form.Control type="date" id="birthday" value={values.birthday} onChange={handleChange} onBlur={handleBlur} />
           <Form.Text className="text-muted">
             {errors.birthday && touched.birthday && errors.birthday}
           </Form.Text>
@@ -38,12 +38,14 @@ const CatFormStructure = ({
             type="radio"
             label="Male"
             name="sex"
+            checked={values.sex === 'male'}
             onChange={handleChange} onBlur={handleBlur}
           />
           <Form.Check
             type="radio"
             label="Female"
             name="sex"
+            checked={values.sex  === 'female'}
             onChange={handleChange} onBlur={handleBlur}
           />
           <Form.Text className="text-muted">
@@ -53,7 +55,7 @@ const CatFormStructure = ({
       </Form.Group>
       <Form.Group>
         <Form.Label>Description</Form.Label>
-        <Form.Control as="textarea" rows="3" id="description" onChange={handleChange} onBlur={handleBlur} />
+        <Form.Control as="textarea" rows="3" id="description" value={values.description} onChange={handleChange} onBlur={handleBlur} />
         <Form.Text className="text-muted">
           {errors.description && touched.description && errors.description}
         </Form.Text>
