@@ -4,12 +4,7 @@ import CatApi from '../../core/apis/cat-api';
 import * as moment from 'moment';
 
 const CatUpdate = ({ idCat }) => {
-    const [catState, setCatState] = useState({
-        name: '',
-        birthday: '',
-        sex: '',
-        description: ''
-    });
+    const [catState, setCatState] = useState({});
     const handlerSend = () => { };
     useLayoutEffect(() => {
         CatApi.fetchCatById(idCat)

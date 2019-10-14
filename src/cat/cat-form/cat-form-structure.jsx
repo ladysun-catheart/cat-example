@@ -18,7 +18,7 @@ const CatFormStructure = ({
         <Col sm={10}>
           <Form.Control type="text" id="name" onChange={handleChange} onBlur={handleBlur} value={values.name} />
           <Form.Text className="text-muted">
-            {errors.name && touched.name && errors.name}
+            {errors.name && errors.name}
           </Form.Text>
         </Col>
       </Form.Group>
@@ -27,7 +27,7 @@ const CatFormStructure = ({
         <Col sm={10}>
           <Form.Control type="date" id="birthday" value={values.birthday} onChange={handleChange} onBlur={handleBlur} />
           <Form.Text className="text-muted">
-            {errors.birthday && touched.birthday && errors.birthday}
+            {errors.birthday && errors.birthday}
           </Form.Text>
         </Col>
       </Form.Group>
@@ -38,6 +38,7 @@ const CatFormStructure = ({
             type="radio"
             label="Male"
             name="sex"
+            value="male"
             checked={values.sex === 'male'}
             onChange={handleChange} onBlur={handleBlur}
           />
@@ -45,11 +46,12 @@ const CatFormStructure = ({
             type="radio"
             label="Female"
             name="sex"
+            value="female"
             checked={values.sex  === 'female'}
             onChange={handleChange} onBlur={handleBlur}
           />
           <Form.Text className="text-muted">
-            {errors.sex && touched.sex && errors.sex}
+            {errors.sex && errors.sex}
           </Form.Text>
         </Col>
       </Form.Group>
@@ -57,7 +59,7 @@ const CatFormStructure = ({
         <Form.Label>Description</Form.Label>
         <Form.Control as="textarea" rows="3" id="description" value={values.description} onChange={handleChange} onBlur={handleBlur} />
         <Form.Text className="text-muted">
-          {errors.description && touched.description && errors.description}
+          {errors.description && errors.description}
         </Form.Text>
       </Form.Group>
       <Button variant="primary" type="submit" disabled={isSubmitting}>{btnName}</Button>
