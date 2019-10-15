@@ -19,9 +19,15 @@ const getLabelBirthday = (ms) => {
   return dateString;
 };
 
+const actionList = (cat) => ([
+  {name: 'Modificar', handlerClick: () => {}},
+  {name: 'Borrar', handlerClick: () => {}},
+]);
+
 const CatInfo = ({ cat }) => (
   <Detail
     isAvailable={Boolean(cat)}
+    actionList={actionList(cat)}
     {...infoCat(cat)}
     {...infoEmpty()}
   />
