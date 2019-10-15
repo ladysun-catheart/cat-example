@@ -13,7 +13,7 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
   });
   const handlerSubmit = (cat, actions) => {
     const catParse = { ...cat, birthday: moment(cat.birthday, 'YYYY-MM-DD').valueOf() };
-    onSubmit(catParse, actions.setErrors);
+    onSubmit(catParse, actions);
   }
   return (
     <Formik
