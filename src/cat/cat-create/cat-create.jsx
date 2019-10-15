@@ -17,19 +17,19 @@ const ModalError = ({ isVisible, onCloseModal }) => (
     </CustomModal>
 );
 
-const CatCreate = ({ goToCatList }) => {
+const CatCreate = ({ insertCat, goToCatList }) => {
     const [visibleModal, setVisibleModal] = useState(false);
     const handlerSubmit = (newCat, actions) => {
-        CatApi.createCat(newCat)
-            .then(res => goToCatList())
-            .catch(err => setVisibleModal(true))
-            .finally(() => actions.setSubmitting(false));
+        const successHandler = () => goToCatList();
+        const errorHandler = () => setVisibleModal(true);
+        const finallyHandler = () => actions.setSubmitting(false);
+        insertCat(newCat, successHandler, errorHandler, finallyHandler);
     };
     return (
         <>
             <CatForm
                 btnName={'Insert'}
-                onSubmit={handlerSubmit}
+                onSubmit={handlerSubmit} 
             />
             <ModalError
                 isVisible={visibleModal}

@@ -23,7 +23,7 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
       initialValues={cat}
       validationSchema={validationSchema}
       onSubmit={handlerSubmit}
-      render={(propsFormik) => React.cloneElement(children, { ...propsFormik, btnName })}
+      render={propsFormik => React.cloneElement(children, { ...propsFormik, btnName })}
     />
   );
 };
