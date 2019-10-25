@@ -19,7 +19,6 @@ const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onCl
             actionList={actionList(data)}
             columnList={columnList}
             key={data.id}
-            columnList={columnList}
             data={data}
             onClick={onClickRow}
           />)

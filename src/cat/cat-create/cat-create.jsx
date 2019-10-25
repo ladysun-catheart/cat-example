@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import CatForm from '../cat-form';
-import CatApi from '../../core/apis/cat-api';
 import CustomModal from '../../core/components/modal';
 import ModalType from '../../core/components/modal/modal-type/modal-type';
 

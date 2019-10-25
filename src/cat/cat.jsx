@@ -36,7 +36,7 @@ const Cat = ({ saveCatList, onClickCat, cat, catList, catTotal, page, rows }) =>
   useEffect(() => {
     globalModalConfig();
     getCatList(page, rows, saveCatList);
-  }, []);
+  }, [page, rows, saveCatList]);
   return (
     <>
       <Row>

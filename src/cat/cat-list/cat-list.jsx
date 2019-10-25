@@ -8,7 +8,7 @@ const columnList = [
 ];
 
 const actionList = (cat) => ([
-  { name: 'Modificar', handlerClick: () => { } },
+  { name: 'Modificar', handlerClick: () => { goToCatCreate() } },
   { name: 'Borrar', handlerClick: () => { } },
 ]);
 

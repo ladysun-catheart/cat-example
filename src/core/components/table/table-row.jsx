@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 const TableRow = ({ actionList, columnList, data, onClick }) => {
     const [styleRow, setStyleRow] = useState({ cursor: 'default' });

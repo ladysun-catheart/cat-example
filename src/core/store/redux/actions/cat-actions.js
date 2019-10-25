@@ -31,19 +31,24 @@ const insertCat = (newCat, successHandler, errorHandler, finallyHandler) => (dis
     .finally(() => finallyHandler())
 );
 
-/* const selectCat = (idCat) => (dispatch) => CatApi.fetchCatById(idCat)
-  .then(cat => dispatch(catSelected(cat)))
-  .catch(err => console.error('error'));
-
-const fillCatList = () => (dispatch) => CatApi.fetchCatList()
-  .then(catList => dispatch(saveCatList(catList)))
-  .catch(err => console.error('error')); */
+const updateCat = (newCat, successHandler, errorHandler, finallyHandler) => (dispatch) => (
+  CatApi.updateCat(newCat)
+    .then(() => CatApi.fetchCatList(1, 10))
+    .then(res => {
+      dispatch(persistCatList(res.data.catTotal, res.data.catList, 1, 10));
+      dispatch(catSelected(newCat));
+      successHandler();
+    })
+    .catch(() => errorHandler())
+    .finally(() => finallyHandler())
+);
 
 const CatActions = {
   actions,
   catSelected,
   persistCatList,
-  insertCat
+  insertCat,
+  updateCat
 };
 
 export default CatActions;
