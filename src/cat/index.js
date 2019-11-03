@@ -1,3 +1,3 @@
-import CatConnect from './connect.js';
-const Cat = CatConnect;
+import Cat from './cat.wrapper';
+
 export default Cat;
