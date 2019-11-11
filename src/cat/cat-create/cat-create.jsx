@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import CatForm from '../cat-form';
 
-const CatCreate = ({ insertCat, goToCatList, saved }) => {
-    const [visibleModal, setVisibleModal] = useState(false)
+const CatCreate = ({ insertCat, goToCatList, created }) => {
     const handlerSubmit = newCat => insertCat(newCat)
+    created && goToCatList()
     return (
-        <>
-            <CatForm
-                btnName={'Insert'}
-                onSubmit={handlerSubmit} 
-            />
-        </>
+        <CatForm
+            btnName={'Insert'}
+            onSubmit={handlerSubmit}
+        />
     );
 }
 

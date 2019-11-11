@@ -4,7 +4,7 @@ import {
   error,
   pending
 } from './utils'
-import * as Error from '../../../config/error-code'
+import Error from '../../../config/error-code'
 
 const initialState = {
   catSelected: null,
@@ -19,7 +19,8 @@ const initialState = {
   deleted: false
 };
 
-function reducer(state = initialState, { cat, catList, catTotalStored, page, rows }) {
+function reducer(state = initialState, payload) {
+  const { type, cat, catList, catTotalStored, page, rows } = {...payload}
   let nextState = {}
   switch (type) {
 

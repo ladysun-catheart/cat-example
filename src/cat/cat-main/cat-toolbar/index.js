@@ -1,5 +1,5 @@
 import CatToolbar from "./cat-toolbar";
-import CatToolbarWrapper from "./wrapper";
+import CatToolbarWrapper from "./cat-toolbar.wrapper";
 
 export default CatToolbarWrapper;
 export {

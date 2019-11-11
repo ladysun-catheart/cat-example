@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { Row, Col } from 'react-bootstrap';
 import CatInfo from './cat-info';
 import CatList from './cat-list';
-import CatActions from './cat-actions';
-import { errorGlobalModalService } from '../core/config/global-modal';
+import CatActions from '../cat-actions';
+import { errorGlobalModalService } from '../../core/config/global-modal';
 import CatToolbar from './cat-toolbar';
 import {
   ModalCreateCatInfo,
@@ -12,7 +12,7 @@ import {
   ModalDeleteCatInfo,
   ModalServerErrorInfo,
   ModalUpdateCatInfo
-} from './cat-modals'
+} from '../cat-modals'
 
 const globalModalConfig = () => (
   errorGlobalModalService.updateGlobalModalProps({
@@ -24,7 +24,7 @@ const globalModalConfig = () => (
   })
 );
 
-const Cat = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, rows }) => {
+const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, rows, created, updated, deleted, pending, error }) => {
   const [dataModalDelete, setDataModalDelete] = useState({ isVisible: false, cat: null });
   const actionList = [
     { name: 'Modificar', handlerClick: cat => goToCatUpdate(cat) },
@@ -43,14 +43,12 @@ const Cat = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, row
       </Row>
       <Row>
         <Col>
-          <CatInfo cat={cat} />
+          <CatInfo />
         </Col>
         <Col>
           <CatList
             onChangePage={(pageSelected, rows) => getCatList(pageSelected, rows)}
             onClickCat={getCat}
-            catList={catList}
-            catTotal={catTotal}
             page={page}
             rows={rows}
             actionList={actionList}
@@ -69,21 +67,35 @@ const Cat = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, row
         onCancel={() => { }}
         onAction={() => deleteCat(dataModalDelete.cat.id)}
       />
-      <CatModalInform />
+      <CatModalContInfo
+        getCat={getCat}
+        created={created}
+        updated={updated}
+        deleted={deleted}
+        pending={pending}
+        error={error}
+        cleanCat={cleanCat}
+      />
     </>
   );
 }
 
-Cat.propTypes = {
+CatMain.propTypes = {
   getCatList: PropTypes.func,
   getCat: PropTypes.func,
   deleteCat: PropTypes.func,
+  cleanCat: PropTypes.func,
   goToCatUpdate: PropTypes.func,
   page: PropTypes.number,
-  rows: PropTypes.number
+  rows: PropTypes.number,
+  created: PropTypes.bool,
+  updated: PropTypes.bool,
+  deleted: PropTypes.bool,
+  pending: PropTypes.bool,
+  error: PropTypes.number
 }
 
-const CatModalInform = ({ created, updated, deleted, pending, error }) => {
+const CatModalContInfo = ({ created, updated, deleted, pending, error, cleanCat }) => {
   return (
     <>
       <ModalDeleteCatInfo
@@ -110,7 +122,8 @@ const CatModalInform = ({ created, updated, deleted, pending, error }) => {
   );
 }
 
-Cat.propTypes = {
+CatMain.propTypes = {
+  cleanCat: PropTypes.func,
   created: PropTypes.bool,
   updated: PropTypes.bool,
   deleted: PropTypes.bool,
@@ -118,4 +131,4 @@ Cat.propTypes = {
   error: PropTypes.number
 }
 
-export default Cat;
+export default CatMain;

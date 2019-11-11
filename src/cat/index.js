@@ -1,3 +1,9 @@
-import Cat from './cat.wrapper';
+import CatActions from './cat-actions'
+import CatCreate from './cat-create'
+import CatMain from './cat-main'
 
-export default Cat;
+export {
+  CatActions,
+  CatCreate,
+  CatMain
+}
