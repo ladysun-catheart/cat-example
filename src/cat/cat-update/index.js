@@ -1,8 +1,12 @@
 import CatUpdate from "./cat-update";
-import CatUpdateWrapper from "./wrapper";
+import {
+    CatPreUpdateWrapper,
+    CatUpdateWrapper
+} from "./cat-update.wrapper";
 
-export default CatUpdateWrapper;
+export default CatPreUpdateWrapper;
 export {
     CatUpdate,
+    CatPreUpdateWrapper,
     CatUpdateWrapper
 }

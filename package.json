@@ -20,6 +20,8 @@
     "react-router-dom": "^5.1.2",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
+    "redux-promise": "^0.6.0",
+    "redux-promise-middleware": "^6.1.2",
     "redux-thunk": "^2.3.0",
     "rxjs": "^6.5.3",
     "xml": "^1.0.1",

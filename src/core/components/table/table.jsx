@@ -16,10 +16,9 @@ const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onCl
       <tbody>
         {dataList && dataList.map(data => (
           <TableRow
-            actionList={actionList(data)}
+            actionList={actionList}
             columnList={columnList}
             key={data.id}
-            columnList={columnList}
             data={data}
             onClick={onClickRow}
           />)

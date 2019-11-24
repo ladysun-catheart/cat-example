@@ -1,18 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Table from '../../core/components/table';
+import Table from '../../../core/components/table';
 
 const columnList = [
   { id: 'id', label: 'Id' },
   { id: 'name', label: 'Nombre' },
 ];
 
-const actionList = (cat) => ([
-  { name: 'Modificar', handlerClick: () => { } },
-  { name: 'Borrar', handlerClick: () => { } },
-]);
-
-const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows }) => (
+const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows, actionList }) => (
   <Table
     actionList={actionList}
     columnList={columnList}
@@ -32,6 +27,7 @@ CatList.propTypes = {
   onClickCat: PropTypes.func,
   page: PropTypes.number,
   rows: PropTypes.number,
+  actionList: PropTypes.array,
 };
 
 export default CatList;

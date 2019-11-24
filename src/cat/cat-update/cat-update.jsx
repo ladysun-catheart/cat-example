@@ -1,21 +1,16 @@
-import React, { useState, useLayoutEffect } from 'react';
+import React, { useEffect } from 'react';
 import CatForm from '../cat-form';
-import CatApi from '../../core/apis/cat-api';
-import * as moment from 'moment';
 
-const CatUpdate = ({ idCat }) => {
-    const [catState, setCatState] = useState({});
-    const handlerSend = () => { };
-    useLayoutEffect(() => {
-        CatApi.fetchCatById(idCat)
-            .then(res => setCatState({
-                ...res.data,
-                birthday: moment(res.data.birthday).format('YYYY-MM-DD')
-            }));
-    }, []);
+const CatUpdate = ({cat, updated, updateCat, goToCatList}) => {
+    const handlerSubmit = (cat, actions) => updateCat(cat)
+    updated && goToCatList()
     return (
-        <CatForm btnName={'Update'} cat={catState} />
-    );
+        <CatForm
+            btnName={'Update'}
+            onSubmit={handlerSubmit}
+            cat={cat}
+        />
+    )
 }
 
-export default CatUpdate;
+export default CatUpdate

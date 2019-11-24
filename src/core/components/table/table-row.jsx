@@ -1,6 +1,28 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Button, ButtonToolbar } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
+
+const CellRegular = ({ columnList, data }) => (
+    columnList.map(column => <td>{data[column.id]}</td>)
+);
+
+const CellActions = ({ actionList, data }) => (
+    <td style={{ textAlign: 'right' }}>
+        {actionList.map(btn => (
+            <Button
+                style={{ marginRight: '5px' }}
+                size='sm'
+                variant='secondary'
+                onClick={e => {
+                  e.stopPropagation()
+                  btn.handlerClick(data)
+                }}
+            >
+                {btn.name}
+            </Button>
+        ))}
+    </td>
+);
 
 const TableRow = ({ actionList, columnList, data, onClick }) => {
     const [styleRow, setStyleRow] = useState({ cursor: 'default' });
@@ -11,17 +33,8 @@ const TableRow = ({ actionList, columnList, data, onClick }) => {
             onMouseEnter={() => setStyleRow({ cursor: 'pointer' })}
             onMouseLeave={() => setStyleRow({ cursor: 'default' })}
         >
-            {columnList.map(column => <td>{data[column.id]}</td>)}
-            <td style={{textAlign: 'right'}}>
-                {actionList.map(btn => (
-                    <Button
-                        style={{ marginRight: '5px' }}
-                        size='sm'
-                        variant='secondary'
-                        onClick={btn.handlerClick}>{btn.name}
-                    </Button>
-                ))}
-            </td>
+            <CellRegular columnList={columnList} data={data} />
+            {actionList && <CellActions actionList={actionList} data={data} />}
         </tr>
     );
 };
