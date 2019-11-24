@@ -7,8 +7,8 @@ const ModalDeleteCatInfo = props => {
   return (
     <ModalInfoBase
       {...props}
-      title={'Creation'}
-      msg={'The cat was created successfully'}
+      title={'Deletion'}
+      msg={'The cat was deleted successfully'}
       labelAction={'Close'}
     />
   )
@@ -16,7 +16,6 @@ const ModalDeleteCatInfo = props => {
 
 ModalDeleteCatInfo.propTypes = {
   isVisible: PropTypes.bool,
-  onClose: PropTypes.func,
   onAction: PropTypes.func
 }
 

@@ -18,7 +18,6 @@ const ModalDeleteCatConfirm = props => {
 ModalDeleteCatConfirm.propTypes = {
   isVisible: PropTypes.bool,
   onClose: PropTypes.func,
-  cat: PropTypes.object,
   onCancel: PropTypes.func,
   onAction: PropTypes.func,
 }

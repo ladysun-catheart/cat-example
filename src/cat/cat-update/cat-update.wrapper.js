@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { useParams, useHistory } from 'react-router'
-import { CatPreUpdate, CatUpdate } from './cat-update'
+import CatUpdate from './cat-update'
+import CatPreUpdate from './cat-pre-update'
 import { CatActions } from '../../core/store/redux/actions'
 
 // Redux
@@ -19,7 +20,7 @@ const CatPreUpdateWrapper = () => {
 
 // Redux
 const mapStateToProps = state => ({
-    cat: state.cat.cat,
+    cat: state.cat.actual,
     updated: state.cat.updated
 })
 const mapDispatchToProps = dispatch => ({

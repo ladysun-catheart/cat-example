@@ -10,7 +10,7 @@ const mapStateToProps = state => ({
     created: state.cat.created
 })
 const mapDispatchToProps = dispatch => ({
-    insertCat: newCat => dispatch(CatActions.insertCat(newCat)),
+    insertCat: newCat => dispatch(CatActions.createCat(newCat)),
 })
 const CatCreateConnect = connect(mapStateToProps, mapDispatchToProps)(CatCreate);
 

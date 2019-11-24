@@ -7,7 +7,7 @@ import {
 import Error from '../../../config/error-code'
 
 const initialState = {
-  catSelected: null,
+  actual: null,
   page: 1,
   rows: 10,
   catList: [],
@@ -19,28 +19,27 @@ const initialState = {
   deleted: false
 };
 
-function reducer(state = initialState, payload) {
-  const { type, cat, catList, catTotalStored, page, rows } = {...payload}
+function reducer(state = initialState, {type, payload}) {
   let nextState = {}
   switch (type) {
 
     //GET_ALL_CATS
-    case success(actions.GET_ALL_CATS):
-      nextState = { ...state, catList, catTotalStored, page, rows, pending: false }
+    case success(actions.GET_CAT_LIST):
+      nextState = { ...state, ...payload, pending: false }
       break;
-    case error(actions.GET_ALL_CATS):
+    case error(actions.GET_CAT_LIST):
       nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: Error.CAT_LIST_NOT_FETCHED };
       break;
-    case pending(actions.GET_ALL_CATS):
+    case pending(actions.GET_CAT_LIST):
       nextState = { ...state, pending: true, error: 0 };
       break;
 
     //GET_CAT
     case success(actions.GET_CAT):
-      nextState = { ...state, cat, pending: false }
+      nextState = { ...state, actual: payload, pending: false }
       break;
     case error(actions.GET_CAT):
-      nextState = { ...state, cat: {}, pending: false, error: Error.CAT_NOT_FETCHED };
+      nextState = { ...state, catSelected: {}, pending: false, error: Error.CAT_NOT_FETCHED };
       break;
     case pending(actions.GET_CAT):
       nextState = { ...state, pending: true, error: 0 };

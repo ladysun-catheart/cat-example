@@ -12,6 +12,7 @@ const actions = {
 const getCatList = (page, rows) => ({
   type: actions.GET_CAT_LIST,
   payload: CatApi.fetchCatList(page, rows)
+    .then(data => new Promise(resolve => resolve({...data, page, rows})))
 })
 
 const getCat = id => ({

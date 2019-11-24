@@ -13,7 +13,10 @@ const CellActions = ({ actionList, data }) => (
                 style={{ marginRight: '5px' }}
                 size='sm'
                 variant='secondary'
-                onClick={() => btn.handlerClick(data)}
+                onClick={e => {
+                  e.stopPropagation()
+                  btn.handlerClick(data)
+                }}
             >
                 {btn.name}
             </Button>
