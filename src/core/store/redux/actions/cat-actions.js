@@ -1,33 +1,51 @@
-// import CatApi from './../../../apis/cat-api';
+import CatApi from './../../../apis/cat-api';
 
 const actions = {
-  SUCCESS_SELECT_CAT: 'SUCCESS_SELECT_CATTCH_CAT',
-  SUCCESS_FILL_CAT_LIST: 'SUCCESS_FILL_CAT_LIST',
+  GET_CAT_LIST: 'GET_CAT_LIST',
+  GET_CAT: 'GET_CAT',
+  CREATE_CAT: 'CREATE_CAT',
+  DELETE_CAT: 'DELETE_CAT',
+  UPDATE_CAT: 'UPDATE_CAT',
+  CLEAN_CAT: 'CLEAN_CAT'
 };
 
-const catSelected = (cat) => ({
-  type: actions.SUCCESS_SELECT_CAT,
-  cat
-});
+const getCatList = (page, rows) => ({
+  type: actions.GET_CAT_LIST,
+  payload: CatApi.fetchCatList(page, rows)
+    .then(data => new Promise(resolve => resolve({...data, page, rows})))
+})
 
-const persistCatList = (catTotalStored, catListFinded) => ({
-  type: actions.SUCCESS_FILL_CAT_LIST,
-  catTotalStored,
-  catListFinded
-});
+const getCat = id => ({
+  type: actions.GET_CAT,
+  payload: CatApi.fetchCatById(id)
+})
 
-/* const selectCat = (idCat) => (dispatch) => CatApi.fetchCatById(idCat)
-  .then(cat => dispatch(catSelected(cat)))
-  .catch(err => console.error('error'));
+const deleteCat = id => ({
+  type: actions.DELETE_CAT,
+  payload: CatApi.deleteCat(id)
+})
 
-const fillCatList = () => (dispatch) => CatApi.fetchCatList()
-  .then(catList => dispatch(saveCatList(catList)))
-  .catch(err => console.error('error')); */
+const createCat = cat => ({
+  type: actions.CREATE_CAT,
+  payload: CatApi.createCat(cat)
+})
 
-const CatActions = {
+const updateCat = cat => ({
+  type: actions.UPDATE_CAT,
+  payload: CatApi.updateCat(cat)
+})
+
+const cleanCat = cleanProps => ({
+  type: actions.CLEAN_CAT,
+  payload: cleanProps
+})
+
+export {
   actions,
-  catSelected,
-  persistCatList
-};
-
-export default CatActions;
+  getCatList,
+  getCat,
+  deleteCat,
+  createCat,
+  updateCat,
+  cleanCat
+}
