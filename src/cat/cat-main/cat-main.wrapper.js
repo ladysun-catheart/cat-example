@@ -4,8 +4,6 @@ import CatMain from "./cat-main";
 import { CatActions } from '../../core/store/redux/actions';
 import { useHistory } from 'react-router';
 
-// getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, rows, created, updated, deleted, pending, error
-
 // Redux
 const mapStateToProps = state => ({
   page: state.cat.page,
