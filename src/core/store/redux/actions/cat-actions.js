@@ -6,7 +6,8 @@ const actions = {
   CREATE_CAT: 'CREATE_CAT',
   DELETE_CAT: 'DELETE_CAT',
   UPDATE_CAT: 'UPDATE_CAT',
-  CLEAN_CAT: 'CLEAN_CAT'
+  CLEAN_CAT: 'CLEAN_CAT',
+  SEARCH_CAT: 'SEARCH_CAT'
 };
 
 const getCatList = (page, rows) => ({
@@ -40,6 +41,11 @@ const cleanCat = cleanProps => ({
   payload: cleanProps
 })
 
+const searchCat = str => ({
+  type: actions.SEARCH_CAT,
+  payload: str
+})
+
 export {
   actions,
   getCatList,
@@ -47,5 +53,6 @@ export {
   deleteCat,
   createCat,
   updateCat,
-  cleanCat
+  cleanCat,
+  searchCat
 }

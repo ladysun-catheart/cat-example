@@ -19,6 +19,17 @@ const initialState = {
   deleted: false
 };
 
+let prevCatList = []
+const searchCats = (str, catList) => {
+  if(str === '' && prevCatList.length !== 0)
+    return prevCatList
+  else {
+    prevCatList = [...catList]
+    const regex = new RegExp(str)
+    return catList.filter(cat => regex.test(cat.name))
+  }
+}
+
 function reducer(state = initialState, {type, payload}) {
   let nextState = {}
   switch (type) {
@@ -39,7 +50,7 @@ function reducer(state = initialState, {type, payload}) {
       nextState = { ...state, actual: payload, pending: false }
       break;
     case error(actions.GET_CAT):
-      nextState = { ...state, catSelected: {}, pending: false, error: Error.CAT_NOT_FETCHED };
+      nextState = { ...state, actual: null, pending: false, error: Error.CAT_NOT_FETCHED };
       break;
     case pending(actions.GET_CAT):
       nextState = { ...state, pending: true, error: 0 };
@@ -76,6 +87,12 @@ function reducer(state = initialState, {type, payload}) {
       break;
     case pending(actions.UPDATE_CAT):
       nextState = { ...state, pending: true, error: 0 };
+      break;
+
+    //SEARCH_CAT
+    case actions.SEARCH_CAT:
+      const catListSearch = searchCats(payload, state.catList)
+      nextState = { ...state, catList: catListSearch, catTotalStored: catListSearch.length, page: 1, rows: 10 }
       break;
 
     //CLEAN
