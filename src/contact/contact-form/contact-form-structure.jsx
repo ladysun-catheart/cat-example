@@ -12,11 +12,6 @@ const ContactForm = ({
   handleSubmit,
   isSubmitting,
 }) => {
-  const schemaForm = {
-    user: yup.string().required('The username is required'),
-    mail: yup.string().email('This must be an email').required('The mail is required'),
-    content: yup.string().required('The content is required')
-  };
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <Form.Group>

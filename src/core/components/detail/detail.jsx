@@ -3,19 +3,21 @@ import PropTypes from 'prop-types';
 import DetailFilled from './detail-filled';
 import DetailEmpty from './detail-empty';
 
-const Detail = ({ isAvailable, actionList, title, subtitle, description, emptyTitle, emptyText }) => (
-  isAvailable ? (
-    <DetailFilled
-      actionList={actionList}
+const Detail = ({
+  isAvailable,
+  actionList,
+  title,
+  subtitle,
+  description,
+  emptyTitle,
+  emptyText
+}) => (
+    isAvailable ? (<DetailFilled actionList={actionList}
       title={title}
       subtitle={subtitle}
       description={description}
-    />) : (
-      <DetailEmpty
-        emptyTitle={emptyTitle}
-        emptyText={emptyText}
-      />)
-);
+    />) : (<DetailEmpty emptyTitle={emptyTitle} emptyText={emptyText} />)
+  );
 
 DetailFilled.propTypes = {
   isAvailable: PropTypes.boolean,
