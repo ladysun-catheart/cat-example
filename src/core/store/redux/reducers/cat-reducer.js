@@ -24,7 +24,7 @@ function reducer(state = initialState, { type, payload }) {
   let nextState = {}
   switch (type) {
 
-    //GET_ALL_CATS
+    //GET_CAT_LIST
     case success(actions.GET_CAT_LIST):
       nextState = { ...state, ...payload, pending: false }
       break;
@@ -106,3 +106,7 @@ function reducer(state = initialState, { type, payload }) {
 }
 
 export default reducer;
+export {
+  initialState,
+  reducer
+}
