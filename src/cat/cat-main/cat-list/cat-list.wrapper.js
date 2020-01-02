@@ -3,7 +3,7 @@ import CatList from "./cat-list";
 
 const mapStateToProps = state => ({
     catList: state.cat.catList,
-    catTotal: state.cat.catTotal,
+    catTotal: state.cat.catTotalStored,
 })
 
 const CatListWrapper = connect(mapStateToProps)(CatList)
