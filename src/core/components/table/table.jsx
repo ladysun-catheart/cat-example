@@ -1,38 +1,40 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import * as TableBS from 'react-bootstrap/Table';
+import TableBS from 'react-bootstrap/Table';
 import TableRow from './table-row';
 import TablePaginator from './table-paginator';
 
-const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onClickRow, page, rows }) => (
-  <div>
-    <TableBS striped bordered hover>
-      <thead>
-        <tr>
-          {columnList.map(column => <th>{column.label}</th>)}
-          {actionList && <th/>}
-        </tr>
-      </thead>
-      <tbody>
-        {dataList && dataList.map(data => (
-          <TableRow
-            actionList={actionList}
-            columnList={columnList}
-            key={data.id}
-            data={data}
-            onClick={onClickRow}
-          />)
-        )}
-      </tbody>
-    </TableBS>
-    <TablePaginator
-      page={page}
-      rows={rows}
-      dataTotal={dataTotal}
-      onChangePage={onChangePage}
-    />
-  </div>
-);
+const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onClickRow, page, rows }) => {
+  return (
+    <div>
+      <TableBS striped bordered hover>
+        <thead>
+          <tr>
+            {columnList.map(column => <th>{column.label}</th>)}
+            {actionList && <th />}
+          </tr>
+        </thead>
+        <tbody>
+          {dataList && dataList.map(data => (
+            <TableRow
+              actionList={actionList}
+              columnList={columnList}
+              key={data.id}
+              data={data}
+              onClick={onClickRow}
+            />)
+          )}
+        </tbody>
+      </TableBS>
+      <TablePaginator
+        page={page}
+        rows={rows}
+        dataTotal={dataTotal}
+        onChangePage={onChangePage}
+      />
+    </div>
+  )
+};
 
 Table.propTypes = {
   actionList: PropTypes.array,
