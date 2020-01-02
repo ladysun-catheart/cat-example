@@ -6,6 +6,7 @@ import { useHistory } from 'react-router';
 
 // Redux
 const mapStateToProps = state => ({
+  catSearch: state.cat.string,
   page: state.cat.page,
   rows: state.cat.rows,
   created: state.cat.created,
@@ -15,9 +16,10 @@ const mapStateToProps = state => ({
   error: state.cat.error
 });;
 const mapDispatchToProps = dispatch => ({
-  getCatList: (page, rows) => dispatch(CatActions.getCatList(page, rows)),
+  getCatList: (page, rows, str) => dispatch(CatActions.getCatListFilter(page, rows, str)),
   getCat: id => dispatch(CatActions.getCat(id)),
   deleteCat: id => dispatch(CatActions.deleteCat(id)),
+  updateCatCriteriaSearch: str => dispatch(CatActions.updateCatCriteriaSearch(str)),
   cleanCat: cleanProps => dispatch(CatActions.cleanCat(cleanProps))
 });
 const CatMainConnect = connect(mapStateToProps, mapDispatchToProps)(CatMain);

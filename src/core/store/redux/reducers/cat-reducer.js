@@ -12,6 +12,7 @@ const initialState = {
   rows: 10,
   catList: [],
   catTotalStored: 0,
+  catSearch: '\\w',
   pending: false,
   error: 0,
   created: false,
@@ -19,18 +20,7 @@ const initialState = {
   deleted: false
 };
 
-let prevCatList = []
-const searchCats = (str, catList) => {
-  if(str === '' && prevCatList.length !== 0)
-    return prevCatList
-  else {
-    prevCatList = [...catList]
-    const regex = new RegExp(str)
-    return catList.filter(cat => regex.test(cat.name))
-  }
-}
-
-function reducer(state = initialState, {type, payload}) {
+function reducer(state = initialState, { type, payload }) {
   let nextState = {}
   switch (type) {
 
@@ -89,13 +79,20 @@ function reducer(state = initialState, {type, payload}) {
       nextState = { ...state, pending: true, error: 0 };
       break;
 
-    //SEARCH_CAT
-    case actions.SEARCH_CAT:
-      const catListSearch = searchCats(payload, state.catList)
-      nextState = { ...state, catList: catListSearch, catTotalStored: catListSearch.length, page: 1, rows: 10 }
+    //GET_CAT_LIST_FILTER
+    case success(actions.GET_CAT_LIST_FILTER):
+      nextState = { ...state, ...payload, pending: false }
+      break;
+    case error(actions.GET_CAT_LIST_FILTER):
+      nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: Error.CAT_LIST_NOT_FETCHED };
+      break;
+    case pending(actions.GET_CAT_LIST_FILTER):
+      nextState = { ...state, pending: true, error: 0 };
       break;
 
+    //UPDATE_CAT_CRITERIA_SEARCH
     //CLEAN
+    case actions.UPDATE_CAT_CRITERIA_SEARCH:
     case actions.CLEAN_CAT:
       nextState = { ...state, ...payload }
       break;

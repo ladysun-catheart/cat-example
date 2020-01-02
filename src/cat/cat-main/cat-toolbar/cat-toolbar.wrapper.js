@@ -5,7 +5,7 @@ import { CatActions } from '../../../core/store/redux/actions';
 import CatToolbar from './cat-toolbar';
 
 const mapDispatchToProps = dispatch => ({
-  onClickSearch: str => dispatch(CatActions.searchCat(str))
+  onClickSearch: (page, rows, str) => dispatch(CatActions.getCatListFilter(page, rows, str))
 })
 const CatToolbarConnect = connect(null, mapDispatchToProps)(CatToolbar)
 

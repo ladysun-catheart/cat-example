@@ -7,7 +7,7 @@ import CatActions from '../cat-actions'
 import CatToolbar from './cat-toolbar'
 import CatModalContInfo from './cat-main.modals'
 
-const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page, rows, created, updated, deleted, pending, error }) => {
+const CatMain = ({ getCatList, getCat, deleteCat, updateCatCriteriaSearch, cleanCat, goToCatUpdate, catSearch, page, rows, created, updated, deleted, pending, error }) => {
   const [dataModalDelete, setDataModalDelete] = useState({ isVisible: false, cat: null });
   const actionList = [
     { name: 'Modificar', handlerClick: cat => goToCatUpdate(cat) },
@@ -15,13 +15,13 @@ const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, page,
   ];
 
   useEffect(() => {
-    getCatList(page, rows);
-  }, [page, rows, deleted]);
+    getCatList(page, rows, catSearch);
+  }, [catSearch, page, rows, deleted]);
 
   return (
     <>
       <Row>
-        <CatToolbar onClickSearch={null} />
+        <CatToolbar onClickSearch={updateCatCriteriaSearch} />
       </Row>
       <Row>
         <Col>
@@ -61,8 +61,10 @@ CatMain.propTypes = {
   getCatList: PropTypes.func,
   getCat: PropTypes.func,
   deleteCat: PropTypes.func,
+  updateCatCriteriaSearch: PropTypes.func,
   cleanCat: PropTypes.func,
   goToCatUpdate: PropTypes.func,
+  catSearch: PropTypes.string,
   page: PropTypes.number,
   rows: PropTypes.number,
   created: PropTypes.bool,

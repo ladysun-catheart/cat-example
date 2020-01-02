@@ -7,13 +7,14 @@ const actions = {
   DELETE_CAT: 'DELETE_CAT',
   UPDATE_CAT: 'UPDATE_CAT',
   CLEAN_CAT: 'CLEAN_CAT',
-  SEARCH_CAT: 'SEARCH_CAT'
+  GET_CAT_LIST_FILTER: 'GET_CAT_LIST_FILTER',
+  UPDATE_CAT_CRITERIA_SEARCH: 'UPDATE_CAT_CRITERIA_SEARCH'
 };
 
 const getCatList = (page, rows) => ({
   type: actions.GET_CAT_LIST,
   payload: CatApi.fetchCatList(page, rows)
-    .then(data => new Promise(resolve => resolve({...data, page, rows})))
+    .then(data => new Promise(resolve => resolve({ ...data, page, rows })))
 })
 
 const getCat = id => ({
@@ -41,9 +42,15 @@ const cleanCat = cleanProps => ({
   payload: cleanProps
 })
 
-const searchCat = str => ({
-  type: actions.SEARCH_CAT,
-  payload: str
+const getCatListFilter = (page, rows, str = '\\w') => ({
+  type: actions.GET_CAT_LIST_FILTER,
+  payload: CatApi.searchCat(str, page, rows)
+    .then(data => Promise.resolve({ ...data, page, rows }))
+})
+
+const updateCatCriteriaSearch = str => ({
+  type: actions.UPDATE_CAT_CRITERIA_SEARCH,
+  payload: { str }
 })
 
 export {
@@ -54,5 +61,6 @@ export {
   createCat,
   updateCat,
   cleanCat,
-  searchCat
+  getCatListFilter,
+  updateCatCriteriaSearch
 }
