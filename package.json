@@ -50,6 +50,7 @@
     ]
   },
   "devDependencies": {
+    "@testing-library/react": "^9.4.0",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "faker": "^4.1.0",
