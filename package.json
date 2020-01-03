@@ -32,6 +32,8 @@
     "mock": "node ./mock-server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "e2e:open": "npx cypress open",
+    "e2e:run": "npx cypress run",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -51,6 +53,7 @@
   },
   "devDependencies": {
     "@testing-library/react": "^9.4.0",
+    "cypress": "^3.8.1",
     "enzyme": "^3.10.0",
     "enzyme-adapter-react-16": "^1.14.0",
     "faker": "^4.1.0",
