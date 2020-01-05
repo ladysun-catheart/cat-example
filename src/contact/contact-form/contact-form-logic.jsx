@@ -7,7 +7,7 @@ import * as moment from 'moment';
 const ContactFormLogic = ({ children, onSubmit }) => {
   const validationSchema = yup.object().shape({
     user: yup.string().required('The user is required'),
-    mail: yup.string().required('The mail is required'),
+    mail: yup.string().email().required('The mail is required'),
     content: yup.string().required('The content is required'),
   });
   const handlerSubmit = (msg, actions) => {
@@ -18,6 +18,11 @@ const ContactFormLogic = ({ children, onSubmit }) => {
       enableReinitialize
       validateOnChange
       validateOnBlur
+      initialValues={{
+        user: '',
+        mail: '',
+        content: '',
+      }}
       validationSchema={validationSchema}
       onSubmit={handlerSubmit}
       render={propsFormik => React.cloneElement(children, { ...propsFormik })}

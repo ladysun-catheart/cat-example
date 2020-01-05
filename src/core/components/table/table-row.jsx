@@ -14,8 +14,8 @@ const CellActions = ({ actionList, data }) => (
                 size='sm'
                 variant='secondary'
                 onClick={e => {
-                  e.stopPropagation()
-                  btn.handlerClick(data)
+                    e.stopPropagation()
+                    btn.handlerClick(data)
                 }}
             >
                 {btn.name}
@@ -24,10 +24,11 @@ const CellActions = ({ actionList, data }) => (
     </td>
 );
 
-const TableRow = ({ actionList, columnList, data, onClick }) => {
+const TableRow = ({ actionList, columnList, data, onClick, 'data-testid': dataTestid }) => {
     const [styleRow, setStyleRow] = useState({ cursor: 'default' });
     return (
         <tr
+            data-testid={dataTestid}
             style={styleRow}
             onClick={() => onClick(data)}
             onMouseEnter={() => setStyleRow({ cursor: 'pointer' })}
@@ -40,6 +41,7 @@ const TableRow = ({ actionList, columnList, data, onClick }) => {
 };
 
 TableRow.propTypes = {
+    'data-testid': PropTypes.string,
     actionList: PropTypes.array,
     columnList: PropTypes.array,
     data: PropTypes.object,

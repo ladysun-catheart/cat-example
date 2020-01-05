@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import TestIds from '../../core/config/test-ids'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
 import CatInfo from './cat-info'
@@ -21,14 +22,17 @@ const CatMain = ({ getCatList, getCat, deleteCat, updateCatCriteriaSearch, clean
   return (
     <>
       <Row>
-        <CatToolbar onClickSearch={updateCatCriteriaSearch} />
+        <CatToolbar
+          onClickSearch={updateCatCriteriaSearch}
+        />
       </Row>
       <Row>
         <Col>
-          <CatInfo />
+          <CatInfo data-testid={TestIds.catInfoMain} />
         </Col>
         <Col>
           <CatList
+            data-testid={TestIds.catListMain}
             onChangePage={(pageSelected, rows) => getCatList(pageSelected, rows)}
             onClickCat={cat => getCat(cat.id)}
             page={page}

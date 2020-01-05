@@ -10,16 +10,28 @@ const Detail = ({
   subtitle,
   description,
   emptyTitle,
-  emptyText
+  emptyText,
+  'data-testid': dataTestid
 }) => (
-    isAvailable ? (<DetailFilled actionList={actionList}
-      title={title}
-      subtitle={subtitle}
-      description={description}
-    />) : (<DetailEmpty emptyTitle={emptyTitle} emptyText={emptyText} />)
+    isAvailable ? (
+      <DetailFilled
+        data-testid={`${dataTestid}-filled`}
+        actionList={actionList}
+        title={title}
+        subtitle={subtitle}
+        description={description}
+      />
+    ) : (
+        <DetailEmpty
+          data-testid={`${dataTestid}-empty`}
+          emptyTitle={emptyTitle}
+          emptyText={emptyText}
+        />
+      )
   );
 
 DetailFilled.propTypes = {
+  'data-testid': PropTypes.string,
   isAvailable: PropTypes.boolean,
   actionList: PropTypes.array,
   title: PropTypes.oneOfType([

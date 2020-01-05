@@ -23,7 +23,7 @@ const ContactForm = ({
           onBlur={handleBlur}
         />
         <Form.Text className="text-muted">
-          {errors.user && errors.user}
+          {touched.user && errors.user}
         </Form.Text>
       </Form.Group>
       <Form.Group>
@@ -35,7 +35,7 @@ const ContactForm = ({
           onBlur={handleBlur}
         />
         <Form.Text className="text-muted">
-          {errors.mail && errors.mail}
+          {touched.mail && errors.mail}
         </Form.Text>
       </Form.Group>
       <Form.Group>
@@ -47,7 +47,7 @@ const ContactForm = ({
           onBlur={handleBlur}
         />
         <Form.Text className="text-muted">
-          {errors.content && errors.content}
+          {touched.content && errors.content}
         </Form.Text>
       </Form.Group>
       <Button variant="primary" type="submit" >Enviar</Button>

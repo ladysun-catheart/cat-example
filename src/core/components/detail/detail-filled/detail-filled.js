@@ -10,8 +10,8 @@ const DetailsActions = ({ actionList }) => (
   </Card.Body>
 );
 
-const DetailFilled = ({ actionList, title, subtitle, description }) => (
-  <Card>
+const DetailFilled = ({ actionList, title, subtitle, description, 'data-testid': dataTestid  }) => (
+  <Card data-testid={dataTestid}>
     <Card.Body>
       <Card.Title>{title}</Card.Title>
       <Card.Subtitle className="mb-2 text-muted">{subtitle}</Card.Subtitle>
@@ -22,6 +22,7 @@ const DetailFilled = ({ actionList, title, subtitle, description }) => (
 );
 
 DetailFilled.propTypes = {
+  'data-testid': PropTypes.string,
   actionList: PropTypes.func,
   title: PropTypes.oneOfType([
     PropTypes.elementType,
