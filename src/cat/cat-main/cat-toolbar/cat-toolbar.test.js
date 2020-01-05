@@ -1,4 +1,5 @@
 import React from 'react'
+import TestIds from '../../../core/config/test-ids'
 import {
     render,
     fireEvent
@@ -17,20 +18,22 @@ describe('Given a CatToolbar...', () => {
     beforeEach(() => {
         mockOnClickSearch = jest.fn()
         mockGoToCreateCat = jest.fn()
-        const { getByTestId } = render(<CatToolbar 
-            onClickSearch={mockOnClickSearch} 
-            goToCatCreate={mockGoToCreateCat} 
-            />)
-        inputText = getByTestId('input-search-toolbar')
-        buttonSearch = getByTestId('btn-search-toolbar')
-        buttonCreate = getByTestId('btn-insert-toolbar')
+        const { getByTestId } = render(
+            <CatToolbar
+                onClickSearch={mockOnClickSearch}
+                goToCatCreate={mockGoToCreateCat}
+            />
+        )
+        inputText = getByTestId(TestIds.inputSearchToolbar)
+        buttonSearch = getByTestId(TestIds.btnSearchToolbar)
+        buttonCreate = getByTestId(TestIds.btnInsertToolbar)
     })
 
     test('You can search by any word without spaces', () => {
         // Arrange
         const inputTest = 'test '
         // Act
-        fireEvent.change(inputText, {target: {value: inputTest}})
+        fireEvent.change(inputText, { target: { value: inputTest } })
         fireEvent.click(buttonSearch)
         // Asset
         expect(inputText.value).toBe(inputTest.trim())

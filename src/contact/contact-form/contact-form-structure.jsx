@@ -1,4 +1,5 @@
 import React from 'react';
+import TestIds from '../../core/config/test-ids'
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
@@ -16,41 +17,57 @@ const ContactForm = ({
     <Form noValidate onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Control
+          data-testid={TestIds.nameInputContactForm}
           type="text"
           placeholder="User"
           id="user"
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <Form.Text className="text-muted">
-          {errors.user && errors.user}
+        <Form.Text
+          data-testid={TestIds.nameHintContactForm}
+          className="text-muted"
+        >
+          {touched.user && errors.user}
         </Form.Text>
       </Form.Group>
       <Form.Group>
         <Form.Control
+          data-testid={TestIds.mailInputContactForm}
           type="mail"
           placeholder="Mail contact"
           id="mail"
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <Form.Text className="text-muted">
-          {errors.mail && errors.mail}
+        <Form.Text
+          data-testid={TestIds.mailHintContactForm}
+          className="text-muted"
+        >
+          {touched.mail && errors.mail}
         </Form.Text>
       </Form.Group>
       <Form.Group>
         <Form.Control
+          data-testid={TestIds.contactInputContactForm}
           as="textarea"
           placeholder="What do you want? :)"
           id="content"
           onChange={handleChange}
           onBlur={handleBlur}
         />
-        <Form.Text className="text-muted">
-          {errors.content && errors.content}
+        <Form.Text
+          data-testid={TestIds.contactHintContactForm}
+          className="text-muted"
+        >
+          {touched.content && errors.content}
         </Form.Text>
       </Form.Group>
-      <Button variant="primary" type="submit" >Enviar</Button>
+      <Button
+        data-testid={TestIds.btnContactForm}
+        variant="primary"
+        type="submit"
+      >Enviar</Button>
     </Form>
   );
 }

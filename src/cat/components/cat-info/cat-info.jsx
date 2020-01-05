@@ -24,8 +24,9 @@ const actionList = (cat) => ([
   {name: 'Borrar', handlerClick: () => {}},
 ]);
 
-const CatInfo = ({ cat }) => (
+const CatInfo = ({ cat, 'data-testid': dataTestid }) => (
   <Detail
+    data-testid={dataTestid}
     isAvailable={Boolean(cat)}
     actionList={actionList(cat)}
     {...infoCat(cat)}

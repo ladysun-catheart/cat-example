@@ -7,8 +7,9 @@ const columnList = [
   { id: 'name', label: 'Nombre' },
 ];
 
-const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows, actionList }) => (
+const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows, actionList, 'data-testid': dataTestid }) => (
   <Table
+    data-testid={dataTestid}
     actionList={actionList}
     columnList={columnList}
     dataList={catList}
@@ -21,6 +22,7 @@ const CatList = ({ catList, catTotal, onChangePage, onClickCat, page, rows, acti
 );
 
 CatList.propTypes = {
+  'data-testid': PropTypes.string,
   catList: PropTypes.array,
   catTotal: PropTypes.number,
   onChangePage: PropTypes.func,
