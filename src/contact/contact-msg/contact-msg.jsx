@@ -1,4 +1,5 @@
 import React from 'react';
+import TestIds from '../../core/config/test-ids'
 import PropTypes from 'prop-types';
 import {
     Jumbotron,
@@ -9,11 +10,14 @@ import {
 
 const ContactMsg = ({ msgTitle, msgContent, formContent, reloadForm }) => (
     <Jumbotron fluid>
-        <Container>
+        <Container data-testid={TestIds.msgContactForm}>
             <h1>{msgTitle}</h1>
             <p>{msgContent}</p>
             {formContent && <ContactValueForm contact={formContent} />}
-            <Button onClick={reloadForm}>Enviar otro mensaje</Button>
+            <Button
+                data-testid={TestIds.btnSendMsgContactForm}
+                onClick={reloadForm}
+            >Enviar otro mensaje</Button>
         </Container>
     </Jumbotron>
 );
