@@ -1,3 +1,9 @@
-import CatConnect from './connect.js';
-const Cat = CatConnect;
-export default Cat;
+import CatActions from './cat-actions'
+import CatCreate from './cat-create'
+import CatMain from './cat-main'
+
+export {
+  CatActions,
+  CatCreate,
+  CatMain
+}

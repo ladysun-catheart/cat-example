@@ -1,2 +1,2 @@
-import Contact from './contact.jsx';
+import Contact from './contact.wrapper.js';
 export default Contact;
