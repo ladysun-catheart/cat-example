@@ -7,17 +7,8 @@ const PORT = '9010'
 
 // Conection
 const conn = new Mongo(`${PROTOCOL}://${HOST}:${PORT}`)
-
-// Create DB
 const isNekoDb = conn.getDBNames().indexOf('neko')
-let nekoDb = {}
 if(isNekoDb) {
 	nekoDb = conn.getDB(DB_NEKO)
 	nekoDb.dropDatabase()
 }
-nekoDb = conn.getDB(DB_NEKO)
-
-// Create Collections
-nekoDb.createCollection(COL_CAT)
-
-

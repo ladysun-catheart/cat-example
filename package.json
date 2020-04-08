@@ -36,8 +36,9 @@
     "e2e:run": "npx cypress run",
     "eject": "react-scripts eject",
     "db:data": "node ./server/bd/generate_data.js --num 5 --output ./server/bd",
-    "db:create": "",
-    "db:init": ""
+    "db:init": "mongo localhost:9010 ./server/bd/init_db.js",
+	"db:clean": "mongo localhost:9010 ./server/bd/clean_db.js",
+	"db": "yarn run db:data && yarn run db:init"
   },
   "eslintConfig": {
     "extends": "react-app"
