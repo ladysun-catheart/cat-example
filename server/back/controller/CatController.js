@@ -1,11 +1,13 @@
 const router = require('express').Router()
 
 const catRouter = function (cat) {
-  router.get('/', function (req, res, next) {
+  router.get('/:limit?/:skip?', function (req, res, next) {
+    const { limit, skip } = req.params
     const query = cat.find()
+    skip && query.limit(parseInt(skip))
+    limit && query.limit(parseInt(limit))
     query
       .then(list => {
-        console.log('ok')
         res
           .status(200)
           .json({
@@ -14,7 +16,6 @@ const catRouter = function (cat) {
           })
       })
       .catch(err => {
-        console.log('ko')
         res
           .status(404)
           .json({
