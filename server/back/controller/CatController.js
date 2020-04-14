@@ -137,9 +137,29 @@ const catRouter = function (Cat) {
   })
 
   router.delete('/:id', function (req, res, next) {
-    res
-      .status(200)
-      .json({ links: [{ rel: 'cat list', href: '/cat' }] })
+    const id = req.params.id
+    Cat.findById(id).then(ele => {
+      ele ? Cat.findById(id).remove()
+        .then(ele => {
+          res
+            .status(200)
+            .json({
+              links: [{ rel: 'cat list', href: '/cat/all' }]
+            })
+        })
+        .catch(err => {
+          res
+            .status(400)
+            .json({
+              links: [{ rel: 'cat list', href: '/cat/all' }]
+            })
+        }) :
+        res
+          .status(404)
+          .json({
+            links: [{ rel: 'cat list', href: '/cat/all' }]
+          })
+    })
   })
 
   return router
