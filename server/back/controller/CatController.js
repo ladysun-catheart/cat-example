@@ -72,32 +72,68 @@ const catRouter = function (Cat) {
 
   router.put('/', function (req, res, next) {
     const jsonBody = { ...req.body }
-    const id = jsonBody._id
-    delete jsonBody._id
-    const query = Cat.findByIdAndUpdate(id, jsonBody, { new: true })
-    query.then(ele => {
-      res.json({
-        res: ele,
-        links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
-      })
-    })
-      .catch(err => {
+    const validation = ['_id', 'name', 'sex', 'birthday', 'description'].every(key => Object.keys(jsonBody).indexOf(key) !== -1)
+    if (!validation) {
+      res
+        .status(400)
+        .json({
+          err: { code: 'BAD_REQUEST' },
+          links: [{ rel: 'cat list', href: '/cat/all' }]
+        })
+    } else {
+      const id = jsonBody._id
+      delete jsonBody._id
+      const query = Cat.findByIdAndUpdate(id, jsonBody, { new: true })
+      query.then(ele => {
         res
-          .status(400)
+          .status(200)
           .json({
-            err: { code: 'BAD_REQUEST' },
+            res: ele,
             links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
           })
       })
+        .catch(err => {
+          res
+            .status(400)
+            .json({
+              err: { code: 'BAD_REQUEST' },
+              links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+            })
+        })
+    }
   })
 
   router.patch('/', function (req, res, next) {
-    res
-      .status(200)
-      .json({
-        res: { name: 'cat' },
-        links: [{ rel: 'self', href: req.path }, { rel: 'cat list', href: '/cat' }]
+    const jsonBody = { ...req.body }
+    const validation = Object.keys(jsonBody).every(key => ['_id', 'name', 'sex', 'birthday', 'description'].indexOf(key) !== -1)
+    if (!validation) {
+      res
+        .status(400)
+        .json({
+          err: { code: 'BAD_REQUEST' },
+          links: [{ rel: 'cat list', href: '/cat/all' }]
+        })
+    } else {
+      const id = jsonBody._id
+      delete jsonBody._id
+      const query = Cat.findByIdAndUpdate(id, jsonBody, { new: true })
+      query.then(ele => {
+        res
+          .status(200)
+          .json({
+            res: ele,
+            links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+          })
       })
+        .catch(err => {
+          res
+            .status(400)
+            .json({
+              err: { code: 'BAD_REQUEST' },
+              links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+            })
+        })
+    }
   })
 
   router.delete('/:id', function (req, res, next) {
