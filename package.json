@@ -48,7 +48,8 @@
     "db:init": "mongo localhost:9010 -u nekoAdmin -p nekoAdmin ./server/db/init_db.js",
     "db:drop": "mongo localhost:9010 -u nekoAdmin -p nekoAdmin ./server/db/clean_db.js",
     "db:clean": "yarn run db:drop && yarn run data:clean",
-    "db": "yarn run db:clean && yarn run db:init && yarn run data && yarn run db:import"
+    "db": "yarn run db:clean && yarn run db:init && yarn run data && yarn run db:import",
+    "server:db": "mongod --port 9010 --dbpath ./server/db/data/ --config ./server/db/mongod.conf"
   },
   "eslintConfig": {
     "extends": "react-app"
