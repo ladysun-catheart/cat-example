@@ -13,7 +13,8 @@ const dbConnection = function () {
 			user: 'nekoUser',
 			pass: 'nekoUser',
 			useNewUrlParser: true,
-			useUnifiedTopology: true
+			useUnifiedTopology: true,
+			useFindAndModify: false
 		}
 		const db = mongoose.createConnection(PATH_DB, optsDb)
 		console.log('DBS conected')
