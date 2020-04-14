@@ -1,9 +1,9 @@
 const router = require('express').Router()
 
-const catRouter = function (cat) {
+const catRouter = function (Cat) {
   router.get('/all/:limit?/:skip?', function (req, res, next) {
     const { limit, skip } = req.params
-    const query = cat.find()
+    const query = Cat.find()
     skip && query.limit(parseInt(skip))
     limit && query.limit(parseInt(limit))
     query
@@ -26,7 +26,7 @@ const catRouter = function (cat) {
   })
 
   router.get('/:id', function (req, res, next) {
-    const query = cat.findOne({ _id: req.params.id })
+    const query = Cat.findOne({ _id: req.params.id })
     query
       .then(ele => {
         res
@@ -47,12 +47,27 @@ const catRouter = function (cat) {
   })
 
   router.post('/', function (req, res, next) {
-    res
-      .status(201)
-      .json({
-        res: { name: 'cat' },
-        links: [{ rel: 'self', href: req.path }, { rel: 'cat list', href: '/cat' }]
+    const jsonBody = {...req.body}
+    delete jsonBody._id
+    const cat = new Cat(jsonBody)
+    cat.save()
+      .then(ele => {
+        res
+          .status(201)
+          .json({
+            res: cat,
+            links: [{ rel: 'self', href: `/cat/${cat._id}` }, { rel: 'cat list', href: '/cat' }]
+          })
       })
+      .catch(err => {
+        res
+          .status(400)
+          .json({
+            err: { code: 'BAD_REQUEST' },
+            links: [{ rel: 'cat list', href: '/cat' }]
+          })
+      })
+
   })
 
   router.put('/', function (req, res, next) {

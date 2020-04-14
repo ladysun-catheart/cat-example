@@ -24,7 +24,7 @@ const dbConnection = function () {
 const initModels = function (db) {
 	return new Promise(res => {
 		const models = {}
-		models.cat = db.model('cat', catSchema, 'cat')
+		models.Cat = db.model('Cat', catSchema, 'cat')
 		res(models)
 	})
 }
@@ -34,7 +34,7 @@ const initApi = function (models) {
 		const app = express()
 		app.use(express.json())
 		app.use(morgan(':method :url :status - :response-time ms'))
-		app.use('/cat', catController(models.cat))
+		app.use('/cat', catController(models.Cat))
 		app.listen(PORT, () => {
 			console.log(`Api listen in port ${PORT}`);
 			res()
