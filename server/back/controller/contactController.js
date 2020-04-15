@@ -1,11 +1,11 @@
 const router = require('express').Router()
 
-const catRouter = function (Cat) {
-  router.get('/all/:page?/:rows?', function (req, res, next) {
-    const { page, rows } = req.params
-    const query = Cat.find()
-    page && query.skip((parseInt(page) - 1) * parseInt(rows))
-    rows && query.limit(parseInt(rows))
+const contactRouter = function (Contact) {
+  router.get('/all/:limit?/:skip?', function (req, res, next) {
+    const { limit, skip } = req.params
+    const query = Contact.find()
+    skip && query.limit(parseInt(skip))
+    limit && query.limit(parseInt(limit))
     query
       .then(list => {
         res
@@ -26,14 +26,14 @@ const catRouter = function (Cat) {
   })
 
   router.get('/:id', function (req, res, next) {
-    const query = Cat.findOne({ _id: req.params.id })
+    const query = Contact.findOne({ _id: req.params.id })
     query
       .then(ele => {
         res
           .status(200)
           .json({
             res: ele,
-            links: [{ rel: 'self', href: req.originalUrl }, { rel: 'cat list', href: '/cat/all' }]
+            links: [{ rel: 'self', href: req.originalUrl }, { rel: 'contact list', href: '/contact/all' }]
           })
       })
       .catch(err => {
@@ -41,7 +41,7 @@ const catRouter = function (Cat) {
           .status(404)
           .json({
             err: { code: 'NOT_FOUND' },
-            links: [{ rel: 'self', href: req.originalUrl }, { rel: 'cat list', href: '/cat/all' }]
+            links: [{ rel: 'self', href: req.originalUrl }, { rel: 'contact list', href: '/contact/all' }]
           })
       })
   })
@@ -49,14 +49,14 @@ const catRouter = function (Cat) {
   router.post('/', function (req, res, next) {
     const jsonBody = { ...req.body }
     delete jsonBody._id
-    const cat = new Cat(jsonBody)
-    cat.save()
+    const contact = new Contact(jsonBody)
+    contact.save()
       .then(ele => {
         res
           .status(201)
           .json({
-            res: cat,
-            links: [{ rel: 'self', href: `/cat/${cat._id}` }, { rel: 'cat list', href: '/cat/all' }]
+            res: contact,
+            links: [{ rel: 'self', href: `/contact/${contact._id}` }, { rel: 'contact list', href: '/contact/all' }]
           })
       })
       .catch(err => {
@@ -64,7 +64,7 @@ const catRouter = function (Cat) {
           .status(400)
           .json({
             err: { code: 'BAD_REQUEST' },
-            links: [{ rel: 'cat list', href: '/cat' }]
+            links: [{ rel: 'contact list', href: '/contact' }]
           })
       })
 
@@ -72,24 +72,24 @@ const catRouter = function (Cat) {
 
   router.put('/', function (req, res, next) {
     const jsonBody = { ...req.body }
-    const validation = ['_id', 'name', 'sex', 'birthday', 'description'].every(key => Object.keys(jsonBody).indexOf(key) !== -1)
+    const validation = ['_id', 'user', 'mail', 'content'].every(key => Object.keys(jsonBody).indexOf(key) !== -1)
     if (!validation) {
       res
         .status(400)
         .json({
           err: { code: 'BAD_REQUEST' },
-          links: [{ rel: 'cat list', href: '/cat/all' }]
+          links: [{ rel: 'contact list', href: '/contact/all' }]
         })
     } else {
       const id = jsonBody._id
       delete jsonBody._id
-      const query = Cat.findByIdAndUpdate(id, jsonBody, { new: true })
+      const query = Contact.findByIdAndUpdate(id, jsonBody, { new: true })
       query.then(ele => {
         res
           .status(200)
           .json({
             res: ele,
-            links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+            links: [{ rel: 'self', href: `/contact/${id}` }, { rel: 'contact list', href: '/contact/all' }]
           })
       })
         .catch(err => {
@@ -97,7 +97,7 @@ const catRouter = function (Cat) {
             .status(400)
             .json({
               err: { code: 'BAD_REQUEST' },
-              links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+              links: [{ rel: 'self', href: `/contact/${id}` }, { rel: 'contact list', href: '/contact/all' }]
             })
         })
     }
@@ -105,24 +105,24 @@ const catRouter = function (Cat) {
 
   router.patch('/', function (req, res, next) {
     const jsonBody = { ...req.body }
-    const validation = Object.keys(jsonBody).every(key => ['_id', 'name', 'sex', 'birthday', 'description'].indexOf(key) !== -1)
+    const validation = Object.keys(jsonBody).every(key => ['_id', 'user', 'mail', 'content'].indexOf(key) !== -1)
     if (!validation) {
       res
         .status(400)
         .json({
           err: { code: 'BAD_REQUEST' },
-          links: [{ rel: 'cat list', href: '/cat/all' }]
+          links: [{ rel: 'contact list', href: '/contact/all' }]
         })
     } else {
       const id = jsonBody._id
       delete jsonBody._id
-      const query = Cat.findByIdAndUpdate(id, jsonBody, { new: true })
+      const query = Contact.findByIdAndUpdate(id, jsonBody, { new: true })
       query.then(ele => {
         res
           .status(200)
           .json({
             res: ele,
-            links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+            links: [{ rel: 'self', href: `/contact/${id}` }, { rel: 'contact list', href: '/contact/all' }]
           })
       })
         .catch(err => {
@@ -130,7 +130,7 @@ const catRouter = function (Cat) {
             .status(400)
             .json({
               err: { code: 'BAD_REQUEST' },
-              links: [{ rel: 'self', href: `/cat/${id}` }, { rel: 'cat list', href: '/cat/all' }]
+              links: [{ rel: 'self', href: `/contact/${id}` }, { rel: 'contact list', href: '/contact/all' }]
             })
         })
     }
@@ -138,26 +138,26 @@ const catRouter = function (Cat) {
 
   router.delete('/:id', function (req, res, next) {
     const id = req.params.id
-    Cat.findById(id).then(ele => {
-      ele ? Cat.findById(id).remove()
+    Contact.findById(id).then(ele => {
+      ele ? Contact.findById(id).remove()
         .then(ele => {
           res
             .status(200)
             .json({
-              links: [{ rel: 'cat list', href: '/cat/all' }]
+              links: [{ rel: 'contact list', href: '/contact/all' }]
             })
         })
         .catch(err => {
           res
             .status(400)
             .json({
-              links: [{ rel: 'cat list', href: '/cat/all' }]
+              links: [{ rel: 'contact list', href: '/contact/all' }]
             })
         }) :
         res
           .status(404)
           .json({
-            links: [{ rel: 'cat list', href: '/cat/all' }]
+            links: [{ rel: 'contact list', href: '/contact/all' }]
           })
     })
   })
@@ -165,4 +165,4 @@ const catRouter = function (Cat) {
   return router
 }
 
-module.exports = catRouter 
+module.exports = contactRouter 

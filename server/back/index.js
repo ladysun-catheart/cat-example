@@ -2,7 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
 const catSchema = require('./schema/catSchema')
+const contactSchema = require('./schema/contactSchema')
 const catController = require('./controller/catController')
+const contactController = require('./controller/contactController')
 
 const PORT = 9001
 const PATH_DB = 'mongodb://localhost:9010/neko'
@@ -26,6 +28,7 @@ const initModels = function (db) {
 	return new Promise(res => {
 		const models = {}
 		models.Cat = db.model('Cat', catSchema, 'cat')
+		models.Contact = db.model('Contact', contactSchema, 'contact')
 		res(models)
 	})
 }
@@ -36,6 +39,7 @@ const initApi = function (models) {
 		app.use(express.json())
 		app.use(morgan(':method :url :status - :response-time ms'))
 		app.use('/cat', catController(models.Cat))
+		app.use('/contact', contactController(models.Contact))
 		app.listen(PORT, () => {
 			console.log(`Api listen in port ${PORT}`);
 			res()

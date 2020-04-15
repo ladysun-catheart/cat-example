@@ -1,11 +1,11 @@
 import axios from 'axios'
 
-const FETCH_CAT_LIST = 'http://localhost:9000/cat/list'
-const FETCH_CAT_BY_ID = 'http://localhost:9000/cat'
-const CREATE_CAT = 'http://localhost:9000/cat'
-const UPDATE_CAT = 'http://localhost:9000/cat'
-const DELETE_CAP = 'http://localhost:9000/cat'
-const SEARCH_CAT = 'http://localhost:9000/cat/filter'
+const FETCH_CAT_LIST = 'http://localhost:9001/cat/all'
+const FETCH_CAT_BY_ID = 'http://localhost:9001/cat'
+const CREATE_CAT = 'http://localhost:9001/cat'
+const UPDATE_CAT = 'http://localhost:9001/cat'
+const DELETE_CAP = 'http://localhost:9001/cat'
+const SEARCH_CAT = 'http://localhost:9001/cat/filter'
 
 const fetchAllCatList = () => axios.get(`${FETCH_CAT_LIST}`).then(res => new Promise(resolve => resolve(res.data)))
 const fetchCatList = (page, rows) => axios.get(`${FETCH_CAT_LIST}/${page}/${rows}`).then(res => new Promise(resolve => resolve(res.data)))
