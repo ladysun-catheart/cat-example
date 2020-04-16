@@ -3,7 +3,7 @@ import Detail from '../../../core/components/detail';
 
 const infoCat = cat => (cat ? {
   title: <><span role="img" aria-label="Cat icon">🐱</span> {cat._id} - {cat.name}</>,
-  subtitle: <>{cat.sex.icon} {cat.birthday ? getLabelBirthday(cat.birthday) : ''}</>,
+  subtitle: <>{getSexIcon(cat.sex)} {cat.birthday ? getLabelBirthday(cat.birthday) : ''}</>,
   description: cat.description
 } : {});
 
@@ -11,6 +11,19 @@ const infoEmpty = () => ({
   emptyTitle: 'Welcome to Super Neko Database!',
   emptytext: 'Select a cat to show its details'
 });
+
+const getSexIcon = sex => {
+  switch (sex) {
+    case 'male':
+      return <span>♂️</span>
+      break
+    case 'female':
+      return <span>♀️</span>
+      break
+    default:
+      return '-'
+  }
+}
 
 const getLabelBirthday = (ms) => {
   const date = new Date(ms);
@@ -20,8 +33,8 @@ const getLabelBirthday = (ms) => {
 };
 
 const actionList = (cat) => ([
-  {name: 'Modificar', handlerClick: () => {}},
-  {name: 'Borrar', handlerClick: () => {}},
+  { name: 'Modificar', handlerClick: () => { } },
+  { name: 'Borrar', handlerClick: () => { } },
 ]);
 
 const CatInfo = ({ cat, 'data-testid': dataTestid }) => (
