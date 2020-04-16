@@ -16,7 +16,7 @@ const CatModalContInfo = ({ dataModalDelete, setDataModalDelete, deleteCat, crea
         onCancel={() => setDataModalDelete({...dataModalDelete, isVisible: false})}
         onAction={() => {
           setDataModalDelete({...dataModalDelete, isVisible: false})
-          deleteCat(dataModalDelete.cat.id)
+          deleteCat(dataModalDelete.cat._id)
         }}
       />
       <ModalDeleteCatInfo

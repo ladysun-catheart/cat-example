@@ -34,7 +34,7 @@ const CatMain = ({ getCatList, getCat, deleteCat, updateCatCriteriaSearch, clean
           <CatList
             data-testid={TestIds.catListMain}
             onChangePage={(pageSelected, rows) => getCatList(pageSelected, rows)}
-            onClickCat={cat => getCat(cat.id)}
+            onClickCat={cat => getCat(cat._id)}
             page={page}
             rows={rows}
             actionList={actionList}

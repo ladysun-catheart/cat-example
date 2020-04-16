@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const morgan = require('morgan')
+const cors = require('cors')
 const catSchema = require('./schema/catSchema')
 const contactSchema = require('./schema/contactSchema')
 const catController = require('./controller/catController')
@@ -38,6 +39,7 @@ const initApi = function (models) {
 		const app = express()
 		app.use(express.json())
 		app.use(morgan(':method :url :status - :response-time ms'))
+		app.use(cors())
 		app.use('/cat', catController(models.Cat))
 		app.use('/contact', contactController(models.Contact))
 		app.listen(PORT, () => {

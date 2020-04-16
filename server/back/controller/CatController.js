@@ -25,6 +25,30 @@ const catRouter = function (Cat) {
       })
   })
 
+  router.post('/filter', function (req, res, next) {
+    const { str, page, rows } = req.body
+    const query = Cat.find()
+    page && query.skip((parseInt(page) - 1) * parseInt(rows))
+    rows && query.limit(parseInt(rows))
+    query
+      .then(list => {
+        res
+          .status(200)
+          .json({
+            res: list,
+            links: [{ rel: 'prev', href: '' }, { rel: 'next', href: '' }]
+          })
+      })
+      .catch(err => {
+        res
+          .status(404)
+          .json({
+            err: { code: 'NOT_FOUND' },
+            links: [{ rel: 'self', href: req.originalUrl }]
+          })
+      })
+  })
+
   router.get('/:id', function (req, res, next) {
     const query = Cat.findOne({ _id: req.params.id })
     query

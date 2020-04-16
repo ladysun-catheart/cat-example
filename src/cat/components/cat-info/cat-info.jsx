@@ -2,7 +2,7 @@ import React from 'react';
 import Detail from '../../../core/components/detail';
 
 const infoCat = cat => (cat ? {
-  title: <><span role="img" aria-label="Cat icon">🐱</span> {cat.id} - {cat.name}</>,
+  title: <><span role="img" aria-label="Cat icon">🐱</span> {cat._id} - {cat.name}</>,
   subtitle: <>{cat.sex.icon} {cat.birthday ? getLabelBirthday(cat.birthday) : ''}</>,
   description: cat.description
 } : {});

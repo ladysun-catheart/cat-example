@@ -26,10 +26,10 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT_LIST
     case success(actions.GET_CAT_LIST):
-      nextState = { ...state, ...payload, pending: false }
+      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, pending: false }
       break;
     case error(actions.GET_CAT_LIST):
-      nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: Error.CAT_LIST_NOT_FETCHED };
+      nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: payload.err.code };
       break;
     case pending(actions.GET_CAT_LIST):
       nextState = { ...state, pending: true, error: 0 };
@@ -37,10 +37,10 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT
     case success(actions.GET_CAT):
-      nextState = { ...state, actual: payload, pending: false }
+      nextState = { ...state, actual: payload.res, pending: false }
       break;
     case error(actions.GET_CAT):
-      nextState = { ...state, actual: null, pending: false, error: Error.CAT_NOT_FETCHED };
+      nextState = { ...state, actual: null, pending: false, error: payload.err.code };
       break;
     case pending(actions.GET_CAT):
       nextState = { ...state, pending: true, error: 0 };
@@ -51,7 +51,7 @@ function reducer(state = initialState, { type, payload }) {
       nextState = { ...state, pending: false, deleted: true }
       break;
     case error(actions.DELETE_CAT):
-      nextState = { ...state, pending: false, error: Error.CAT_NOT_DELETED };
+      nextState = { ...state, pending: false, error: payload.err.code };
       break;
     case pending(actions.DELETE_CAT):
       nextState = { ...state, pending: true, error: 0 };
@@ -81,10 +81,10 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT_LIST_FILTER
     case success(actions.GET_CAT_LIST_FILTER):
-      nextState = { ...state, ...payload, pending: false }
+      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, pending: false }
       break;
     case error(actions.GET_CAT_LIST_FILTER):
-      nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: Error.CAT_LIST_NOT_FETCHED };
+      nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: payload.err.code };
       break;
     case pending(actions.GET_CAT_LIST_FILTER):
       nextState = { ...state, pending: true, error: 0 };

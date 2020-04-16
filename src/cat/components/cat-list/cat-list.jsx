@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Table from '../../../core/components/table';
 
 const columnList = [
-  { id: 'id', label: 'Id' },
+  { id: '_id', label: 'Id' },
   { id: 'name', label: 'Nombre' },
 ];
 
