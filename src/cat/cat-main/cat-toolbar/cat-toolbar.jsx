@@ -5,7 +5,7 @@ import { Col, Button, Form, InputGroup } from 'react-bootstrap'
 
 const CatToolbar = ({ onClickSearch, goToCatCreate }) => {
   const [input, setInput] = useState('')
-  const searchValue = () => onClickSearch(1, 10, input.length === 0 ? /\w/ : input)
+  const searchValue = () => onClickSearch(input.trim())
   return (
     <>
       <Col data-testid={TestIds.insertToolbar}>

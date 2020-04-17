@@ -8,22 +8,20 @@ import CatActions from '../cat-actions'
 import CatToolbar from './cat-toolbar'
 import CatModalContInfo from './cat-main.modals'
 
-const CatMain = ({ getCatList, getCat, deleteCat, updateCatCriteriaSearch, cleanCat, goToCatUpdate, catSearch, page, rows, created, updated, deleted, pending, error }) => {
+const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, catSearch, page, rows, created, updated, deleted, pending, error }) => {
   const [dataModalDelete, setDataModalDelete] = useState({ isVisible: false, cat: null });
   const actionList = [
     { name: 'Modificar', handlerClick: cat => goToCatUpdate(cat) },
     { name: 'Borrar', handlerClick: cat => setDataModalDelete({ isVisible: true, cat }) },
   ];
 
-  useEffect(() => {
-    getCatList(page, rows, catSearch);
-  }, [catSearch, page, rows, deleted]);
+  useEffect(() => getCatList('', page, rows), []);
 
   return (
     <>
       <Row>
         <CatToolbar
-          onClickSearch={updateCatCriteriaSearch}
+          onClickSearch={str => getCatList(str, 1, 10)}
         />
       </Row>
       <Row>
@@ -33,7 +31,7 @@ const CatMain = ({ getCatList, getCat, deleteCat, updateCatCriteriaSearch, clean
         <Col>
           <CatList
             data-testid={TestIds.catListMain}
-            onChangePage={(pageSelected, rows) => getCatList(pageSelected, rows)}
+            onChangePage={(pageSelected, rows) => getCatList(catSearch, pageSelected, rows)}
             onClickCat={cat => getCat(cat._id)}
             page={page}
             rows={rows}

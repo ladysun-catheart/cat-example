@@ -4,7 +4,7 @@ import Pagination from 'react-bootstrap/Pagination';
 
 const TablePaginator = ({ page, rows, dataTotal, onChangePage }) => {
   const [actualPage, setActualPage] = useState(page);
-  const totalPages = dataTotal / rows; 
+  const totalPages = Math.ceil(dataTotal / rows); 
   const isDisablePrevFirst = () => actualPage === 1;
   const isDisableNextLast = () => actualPage === totalPages;
   const getPages = () => [];

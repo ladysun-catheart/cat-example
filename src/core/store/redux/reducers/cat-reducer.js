@@ -12,7 +12,7 @@ const initialState = {
   rows: 10,
   catList: [],
   catTotalStored: 0,
-  catSearch: '\\w',
+  catSearch: '',
   pending: false,
   error: 0,
   created: false,
@@ -26,7 +26,7 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT_LIST
     case success(actions.GET_CAT_LIST):
-      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, pending: false }
+      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, catTotalStored: payload.total, pending: false }
       break;
     case error(actions.GET_CAT_LIST):
       nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: payload.err.code };
@@ -81,7 +81,7 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT_LIST_FILTER
     case success(actions.GET_CAT_LIST_FILTER):
-      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, pending: false }
+      nextState = { ...state, catList: payload.res, page: payload.page, rows: payload.rows, catTotalStored: payload.total, pending: false }
       break;
     case error(actions.GET_CAT_LIST_FILTER):
       nextState = { ...state, catList: [], catTotalStored: 0, page: 1, rows: 10, pending: false, error: payload.err.code };

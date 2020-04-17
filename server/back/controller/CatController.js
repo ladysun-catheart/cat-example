@@ -3,18 +3,20 @@ const router = require('express').Router()
 const catRouter = function (Cat) {
   router.get('/all/:page?/:rows?', function (req, res, next) {
     const { page, rows } = req.params
-    const query = Cat.find()
+    const queryCount = () => Cat.count().then(count => Promise.resolve(count))
+    const query = count => Cat.find().then(list => {
+      Promise.resolve(res
+        .status(200)
+        .json({
+          total: count,
+          res: list,
+          links: [{ rel: 'prev', href: '' }, { rel: 'next', href: '' }]
+        }))
+    })
     page && query.skip((parseInt(page) - 1) * parseInt(rows))
     rows && query.limit(parseInt(rows))
-    query
-      .then(list => {
-        res
-          .status(200)
-          .json({
-            res: list,
-            links: [{ rel: 'prev', href: '' }, { rel: 'next', href: '' }]
-          })
-      })
+    queryCount()
+      .then(query)
       .catch(err => {
         res
           .status(404)
@@ -27,18 +29,21 @@ const catRouter = function (Cat) {
 
   router.post('/filter', function (req, res, next) {
     const { str, page, rows } = req.body
-    const query = Cat.find()
-    page && query.skip((parseInt(page) - 1) * parseInt(rows))
-    rows && query.limit(parseInt(rows))
-    query
-      .then(list => {
-        res
-          .status(200)
-          .json({
-            res: list,
-            links: [{ rel: 'prev', href: '' }, { rel: 'next', href: '' }]
-          })
-      })
+    const queryCount = () => Cat.count({ name: { "$regex": str } }).then(count => Promise.resolve(count))
+    const preQuery = Cat.find({ name: { "$regex": str } })
+    page && preQuery.skip((parseInt(page) - 1) * parseInt(rows))
+    rows && preQuery.limit(parseInt(rows))
+    const query = count => preQuery.then((list, err) => 
+      Promise.resolve(res
+        .status(200)
+        .json({
+          total: count,
+          res: list,
+          links: [{ rel: 'prev', href: '' }, { rel: 'next', href: '' }]
+        }))
+    )
+    queryCount()
+      .then(query)
       .catch(err => {
         res
           .status(404)
