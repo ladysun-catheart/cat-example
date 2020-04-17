@@ -24,10 +24,10 @@ const mapDispatchToProps = dispatch => ({
 const CatMainConnect = connect(mapStateToProps, mapDispatchToProps)(CatMain);
 
 // React-router
-const CatCreateWrapper = props => {
+const CatMainWrapper = props => {
     const history = useHistory();
     const goToCatUpdate = cat => history.push(`/cat/${cat._id}/update`);
     return <CatMainConnect {...props} goToCatUpdate={goToCatUpdate} />;
 };
 
-export default CatCreateWrapper;
+export default CatMainWrapper;

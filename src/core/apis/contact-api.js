@@ -1,11 +1,12 @@
-import axios from 'axios';
+import AxiosNeko from './AxiosNeko'
 
-const FETCH_CONTACT_LIST = 'http://localhost:9000/contact/list';
-const POST_CONTACT = 'http://localhost:9000/contact';
+const FETCH_CONTACT_LIST = 'http://localhost:9001contact/list'
+const POST_CONTACT = 'http://localhost:9001/contact'
 
-const fetchAllContactList = (page, rows) => axios.get(`${FETCH_CONTACT_LIST}`);
-const fetchContactList = (page, rows) => axios.get(`${FETCH_CONTACT_LIST}/${page}/${rows}`);
-const insertContact = (contact) => axios.post(`${POST_CONTACT}`, contact).then(res => Promise.resolve(res.data))
+const axiosNekoCat = new AxiosNeko()
+const fetchAllContactList = (page, rows) => axiosNekoCat.get(`${FETCH_CONTACT_LIST}`)
+const fetchContactList = (page, rows) => axiosNekoCat.get(`${FETCH_CONTACT_LIST}/${page}/${rows}`)
+const insertContact = (contact) => axiosNekoCat.post(`${POST_CONTACT}`, contact)
 
 const ContactApi = {
     fetchAllContactList,
@@ -13,4 +14,4 @@ const ContactApi = {
     insertContact,
 };
 
-export default ContactApi;
+export default ContactApi

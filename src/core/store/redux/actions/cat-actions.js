@@ -45,12 +45,7 @@ const cleanCat = cleanProps => ({
 const getCatListFilter = (str = '', page, rows) => ({
   type: actions.GET_CAT_LIST_FILTER,
   payload: CatApi.searchCat(str, page, rows)
-    .then(data => {
-      console.log('-- Action --')
-      console.log('page: ', page)
-      console.log('rows: ', rows)
-      return Promise.resolve({ ...data, page, rows })
-    })
+    .then(data => Promise.resolve({ ...data, page, rows }))
 })
 
 

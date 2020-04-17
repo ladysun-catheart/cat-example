@@ -4,9 +4,10 @@ import ContactForm from './contact-form'
 import ContactApi from '../core/apis/contact-api'
 
 const Contact = ({ sendMessage, cleanContact, msg }) => {
-  useEffect(() => {
+  useEffect(() => { 
     cleanContact()
   }, [])
+  console.log('contact')
   return msg ?
     <ContactMsg
       msgTitle={msg.title}
@@ -14,8 +15,7 @@ const Contact = ({ sendMessage, cleanContact, msg }) => {
       formContent={msg.contact}
       reloadForm={() => cleanContact()} />
     : <ContactForm
-        onSubmit={msg => sendMessage(msg)}
-      />;
-};
-
+      onSubmit={msg => sendMessage(msg)}
+    />;
+}
 export default Contact

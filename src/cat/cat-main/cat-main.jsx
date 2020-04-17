@@ -15,7 +15,9 @@ const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, catSe
     { name: 'Borrar', handlerClick: cat => setDataModalDelete({ isVisible: true, cat }) },
   ];
 
-  useEffect(() => getCatList('', page, rows), []);
+  useEffect(() => {
+    getCatList('', page, rows)
+  }, []);
 
   return (
     <>
