@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import * as moment from 'moment';
 
 const ContactFormLogic = ({ children, onSubmit }) => {
   const validationSchema = yup.object().shape({

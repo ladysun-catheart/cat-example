@@ -1,7 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { useHistory } from 'react-router';
-import { CatActions } from '../../../core/store/redux/actions';
 import CatToolbar from './cat-toolbar';
 
 const CatToolbarWrapper = props => {

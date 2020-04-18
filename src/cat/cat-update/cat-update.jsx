@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import CatForm from '../cat-form';
 
 const CatUpdate = ({cat, updated, updateCat, goToCatList}) => {

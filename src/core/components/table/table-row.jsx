@@ -2,14 +2,11 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Button } from 'react-bootstrap';
 
-const CellRegular = ({ columnList, data }) => (
-    columnList.map(column => <td>{data[column.id]}</td>)
-);
-
 const CellActions = ({ actionList, data }) => (
     <td style={{ textAlign: 'right' }}>
         {actionList.map(btn => (
             <Button
+                key={btn.id}
                 style={{ marginRight: '5px' }}
                 size='sm'
                 variant='secondary'
@@ -34,7 +31,7 @@ const TableRow = ({ actionList, columnList, data, onClick, 'data-testid': dataTe
             onMouseEnter={() => setStyleRow({ cursor: 'pointer' })}
             onMouseLeave={() => setStyleRow({ cursor: 'default' })}
         >
-            <CellRegular columnList={columnList} data={data} />
+            {columnList.map(column => <td key={column.id}>{data[column.id]}</td>)}
             {actionList && <CellActions actionList={actionList} data={data} />}
         </tr>
     );

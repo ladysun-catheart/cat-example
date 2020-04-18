@@ -15,11 +15,9 @@ const infoEmpty = () => ({
 const getSexIcon = sex => {
   switch (sex) {
     case 'male':
-      return <span>♂️</span>
-      break
+      return <span role="img" aria-label="male">♂️</span>
     case 'female':
-      return <span>♀️</span>
-      break
+      return <span role="img" aria-label="female">♀️</span>
     default:
       return '-'
   }

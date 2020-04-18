@@ -11,7 +11,7 @@ const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onCl
       <TableBS striped bordered hover>
         <thead>
           <tr>
-            {columnList.map(column => <th>{column.label}</th>)}
+            {columnList.map(column => <th key={column.id}>{column.label}</th>)}
             {actionList && <th />}
           </tr>
         </thead>
@@ -21,7 +21,7 @@ const Table = ({ actionList, columnList, dataList, dataTotal, onChangePage, onCl
               data-testid={`${dataTestid}${TestIds.row}`}
               actionList={actionList}
               columnList={columnList}
-              key={data.id}
+              key={data._id}
               data={data}
               onClick={onClickRow}
             />)

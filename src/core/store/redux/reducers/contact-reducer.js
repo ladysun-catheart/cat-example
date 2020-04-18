@@ -8,7 +8,6 @@ import {
   successMsg,
   errorMsg
 } from '../../../literals/msgs'
-import Error from '../../../config/error-code'
 
 const initialState = {
   msg: null,

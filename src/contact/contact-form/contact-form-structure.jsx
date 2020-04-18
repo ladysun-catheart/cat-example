@@ -3,7 +3,6 @@ import TestIds from '../../core/config/test-ids'
 import PropTypes from 'prop-types';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
-import * as yup from 'yup';
 
 const ContactForm = ({
   errors,
