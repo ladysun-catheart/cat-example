@@ -12,7 +12,6 @@ const CatFormStructure = ({
   handleSubmit,
   isSubmitting,
 }) => {
-  console.log(values)
   return (
     <Form noValidate onSubmit={handleSubmit}>
       <Form.Group as={Row}>
@@ -27,7 +26,7 @@ const CatFormStructure = ({
       <Form.Group as={Row}>
         <Form.Label column sm={2}>Birthday</Form.Label>
         <Col sm={10}>
-          <Form.Control type="date" id="birthday" value="2018-07-22" onChange={handleChange} onBlur={handleBlur} />
+          <Form.Control type="date" id="birthday" value={values.birthday} onChange={handleChange} onBlur={handleBlur} />
           <Form.Text className="text-muted">
             {errors.birthday && errors.birthday}
           </Form.Text>

@@ -1,10 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   ModalCreateCatInfo,
   ModalDeleteCatConfirm,
   ModalDeleteCatInfo,
-  ModalServerErrorInfo,
   ModalUpdateCatInfo
 } from '../cat-modals'
 
