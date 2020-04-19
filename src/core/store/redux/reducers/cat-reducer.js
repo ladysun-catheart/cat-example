@@ -9,7 +9,7 @@ import Error from '../../../config/error-code'
 const initialState = {
   actual: null,
   page: 1,
-  rows: 10,
+  rows: 6,
   catList: [],
   catTotalStored: 0,
   catSearch: '',

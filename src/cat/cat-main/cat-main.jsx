@@ -9,18 +9,18 @@ import CatToolbar from './cat-toolbar'
 import CatModalContInfo from './cat-main.modals'
 
 const CatMain = ({
-   getCatList, 
-   getCat, 
-   deleteCat, 
-   cleanCat, 
-   goToCatUpdate, 
-   catSearch, 
-   page, 
-   rows, 
-   created, 
-   updated, 
-   deleted
-  }) => {
+  getCatList,
+  getCat,
+  deleteCat,
+  cleanCat,
+  goToCatUpdate,
+  catSearch,
+  page,
+  rows,
+  created,
+  updated,
+  deleted
+}) => {
   const [cat, setCat] = useState(null)
   const [firstRender, setFirstRender] = useState(true)
   const [isVisibleCreateCatInfo, setIsVisibleCreateCatInfo] = useState(false)
@@ -49,7 +49,7 @@ const CatMain = ({
     }
     (updated || deleted || firstRender) && getCatList('', page, rows);
     firstRender && setFirstRender(false);
-    (created || updated || deleted) && cleanCat({created: false, updated: false, deleted: false});
+    (created || updated || deleted) && cleanCat({ created: false, updated: false, deleted: false });
   }, [firstRender, created, updated, deleted])
 
   return (
@@ -60,10 +60,15 @@ const CatMain = ({
         />
       </Row>
       <Row>
-        <Col>
-          <CatInfo data-testid={TestIds.catInfoMain} />
+        <Col lg={6}>
+          <Row>
+            <Col><CatInfo data-testid={TestIds.catInfoMain} /></Col>
+          </Row>
+          <Row>
+            <Col><CatActions /></Col>
+          </Row>
         </Col>
-        <Col>
+        <Col lg={6}>
           <CatList
             data-testid={TestIds.catListMain}
             onChangePage={(pageSelected, rows) => getCatList(catSearch, pageSelected, rows)}
@@ -76,7 +81,7 @@ const CatMain = ({
       </Row>
       <Row>
         <Col>
-          <CatActions />
+
         </Col>
       </Row>
       <CatModalContInfo
