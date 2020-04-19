@@ -5,7 +5,12 @@ const infoCat = cat => (cat ? {
   title: <><span role="img" aria-label="Cat icon">🐱</span> {cat._id} - {cat.name}</>,
   subtitle: <>{getSexIcon(cat.sex)} {cat.birthday ? getLabelBirthday(cat.birthday) : ''}</>,
   description: cat.description
-} : {});
+} : {
+    title: '',
+    subtitle: '',
+    description: ''
+  }
+);
 
 const infoEmpty = () => ({
   emptyTitle: 'Welcome to Super Neko Database!',
@@ -31,14 +36,14 @@ const getLabelBirthday = (ms) => {
 };
 
 const actionList = (cat) => ([
-  { name: 'Modificar', handlerClick: () => { } },
-  { name: 'Borrar', handlerClick: () => { } },
+  { id: 'edit', name: 'Modificar', handlerClick: () => { } },
+  { id: 'delete', name: 'Borrar', handlerClick: () => { } },
 ]);
 
 const CatInfo = ({ cat, 'data-testid': dataTestid }) => (
   <Detail
     data-testid={dataTestid}
-    isAvailable={Boolean(cat)}
+    isAvailable={!!cat}
     actionList={actionList(cat)}
     {...infoCat(cat)}
     {...infoEmpty()}

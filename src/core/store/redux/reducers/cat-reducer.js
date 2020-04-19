@@ -59,7 +59,7 @@ function reducer(state = initialState, { type, payload }) {
 
     //CREATE_CAT
     case success(actions.CREATE_CAT):
-      nextState = { ...state, pending: false, created: true }
+      nextState = { ...state, pending: false, created: true, cat: payload.res }
       break;
     case error(actions.CREATE_CAT):
       nextState = { ...state, pending: false, error: Error.CAT_NOT_CREATED };
@@ -70,7 +70,7 @@ function reducer(state = initialState, { type, payload }) {
 
     //UPDATE_CAT
     case success(actions.UPDATE_CAT):
-      nextState = { ...state, pending: false, updated: true }
+      nextState = { ...state, pending: false, updated: true, cat: payload.res }
       break;
     case error(actions.UPDATE_CAT):
       nextState = { ...state, pending: false, error: Error.CAT_NOT_UPDATED };

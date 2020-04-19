@@ -24,8 +24,8 @@ const ContactFormLogic = ({ children, onSubmit }) => {
       }}
       validationSchema={validationSchema}
       onSubmit={handlerSubmit}
-      render={propsFormik => React.cloneElement(children, { ...propsFormik })}
-    />
+    >{propsFormik => React.cloneElement(children, { ...propsFormik })}
+    </Formik>
   );
 };
 

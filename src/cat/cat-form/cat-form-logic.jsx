@@ -12,6 +12,7 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
     description: yup.string().required('The description is required')
   });
   const handlerSubmit = (cat, actions) => {
+    console.log(cat)
     const catParse = { ...cat, birthday: moment(cat.birthday, 'YYYY-MM-DD').valueOf() };
     onSubmit(catParse, actions);
   }
@@ -23,8 +24,8 @@ const CatFormLogic = ({ children, btnName, cat, onSubmit }) => {
       initialValues={cat}
       validationSchema={validationSchema}
       onSubmit={handlerSubmit}
-      render={propsFormik => React.cloneElement(children, { ...propsFormik, btnName })}
-    />
+    >{ propsFormik => React.cloneElement(children, { ...propsFormik, btnName }) }
+    </Formik >
   );
 };
 

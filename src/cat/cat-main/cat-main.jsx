@@ -8,16 +8,49 @@ import CatActions from '../cat-actions'
 import CatToolbar from './cat-toolbar'
 import CatModalContInfo from './cat-main.modals'
 
-const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, catSearch, page, rows, created, updated, deleted, pending, error }) => {
-  const [dataModalDelete, setDataModalDelete] = useState({ isVisible: false, cat: null });
+const CatMain = ({
+   getCatList, 
+   getCat, 
+   deleteCat, 
+   cleanCat, 
+   goToCatUpdate, 
+   catSearch, 
+   page, 
+   rows, 
+   created, 
+   updated, 
+   deleted
+  }) => {
+  const [cat, setCat] = useState(null)
+  const [firstRender, setFirstRender] = useState(true)
+  const [isVisibleCreateCatInfo, setIsVisibleCreateCatInfo] = useState(false)
+  const [isVisibleDeleteCatConfirm, setIsVisibleDeleteCatConfirm] = useState(false)
+  const [isVisibleDeleteCatInfo, setIsVisibleDeleteCatInfo] = useState(false)
+  const [isVisibleUpdateCatInfo, setIsVisibleUpdateCatInfo] = useState(false)
   const actionList = [
     { id: 'edit', name: 'Modificar', handlerClick: cat => goToCatUpdate(cat) },
-    { id: 'delete', name: 'Borrar', handlerClick: cat => setDataModalDelete({ isVisible: true, cat }) },
+    {
+      id: 'delete', name: 'Borrar', handlerClick: cat => {
+        setIsVisibleDeleteCatConfirm(true)
+        setCat(cat)
+      }
+    },
   ];
 
   useEffect(() => {
-    getCatList('', page, rows)
-  }, []);
+    if (created) {
+      setIsVisibleCreateCatInfo(true)
+    }
+    else if (deleted) {
+      setIsVisibleDeleteCatInfo(true)
+    }
+    else if (updated) {
+      setIsVisibleUpdateCatInfo(true)
+    }
+    (updated || deleted || firstRender) && getCatList('', page, rows);
+    firstRender && setFirstRender(false);
+    (created || updated || deleted) && cleanCat({created: false, updated: false, deleted: false});
+  }, [firstRender, created, updated, deleted])
 
   return (
     <>
@@ -47,15 +80,19 @@ const CatMain = ({ getCatList, getCat, deleteCat, cleanCat, goToCatUpdate, catSe
         </Col>
       </Row>
       <CatModalContInfo
-        dataModalDelete={dataModalDelete}
-        setDataModalDelete={setDataModalDelete}
-        deleteCat={deleteCat}
-        created={created}
-        updated={updated}
-        deleted={deleted}
-        pending={pending}
-        error={error}
-        cleanCat={cleanCat}
+        isVisibleCreateCatInfo={isVisibleCreateCatInfo}
+        isVisibleDeleteCatConfirm={isVisibleDeleteCatConfirm}
+        isVisibleDeleteCatInfo={isVisibleDeleteCatInfo}
+        isVisibleUpdateCatInfo={isVisibleUpdateCatInfo}
+        onActionCreateCatInfo={() => setIsVisibleCreateCatInfo(false)}
+        onCancelDeleteCatConfirm={() => setIsVisibleDeleteCatConfirm(false)}
+        onActionDeleteCatConfirm={() => {
+          deleteCat(cat._id)
+          setIsVisibleDeleteCatConfirm(false)
+          setIsVisibleDeleteCatInfo(true)
+        }}
+        onActionDeleteCatInfo={() => setIsVisibleDeleteCatInfo(false)}
+        onActionUpdateCatInfo={() => setIsVisibleUpdateCatInfo(false)}
       />
     </>
   );
@@ -74,8 +111,6 @@ CatMain.propTypes = {
   created: PropTypes.bool,
   updated: PropTypes.bool,
   deleted: PropTypes.bool,
-  pending: PropTypes.bool,
-  error: PropTypes.number
 }
 
 export default CatMain;
