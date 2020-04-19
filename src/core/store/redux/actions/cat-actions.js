@@ -42,16 +42,12 @@ const cleanCat = cleanProps => ({
   payload: cleanProps
 })
 
-const getCatListFilter = (page, rows, str = '\\w') => ({
+const getCatListFilter = (str = '', page, rows) => ({
   type: actions.GET_CAT_LIST_FILTER,
   payload: CatApi.searchCat(str, page, rows)
     .then(data => Promise.resolve({ ...data, page, rows }))
 })
 
-const updateCatCriteriaSearch = str => ({
-  type: actions.UPDATE_CAT_CRITERIA_SEARCH,
-  payload: { str }
-})
 
 export {
   actions,
@@ -62,5 +58,4 @@ export {
   updateCat,
   cleanCat,
   getCatListFilter,
-  updateCatCriteriaSearch
 }

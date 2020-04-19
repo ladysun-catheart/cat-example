@@ -1,50 +1,60 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {
   ModalCreateCatInfo,
   ModalDeleteCatConfirm,
   ModalDeleteCatInfo,
-  ModalServerErrorInfo,
   ModalUpdateCatInfo
 } from '../cat-modals'
 
-const CatModalContInfo = ({ dataModalDelete, setDataModalDelete, deleteCat, created, deleted, updated, pending, error, cleanCat }) => {
+const CatModalContInfo = ({ 
+  isVisibleCreateCatInfo, 
+  isVisibleDeleteCatConfirm,
+  isVisibleDeleteCatInfo, 
+  isVisibleUpdateCatInfo,
+  onActionCreateCatInfo,
+  onCancelDeleteCatConfirm,
+  onActionDeleteCatConfirm,
+  onActionDeleteCatInfo,
+  onActionUpdateCatInfo,
+}) => {
   return (
     <>
+      <ModalCreateCatInfo
+        isVisible={isVisibleCreateCatInfo}
+        onAction={onActionCreateCatInfo}
+        onClose={() => {}}
+      />
       <ModalDeleteCatConfirm
-        isVisible={dataModalDelete.isVisible}
-        onCancel={() => setDataModalDelete({...dataModalDelete, isVisible: false})}
-        onAction={() => {
-          setDataModalDelete({...dataModalDelete, isVisible: false})
-          deleteCat(dataModalDelete.cat.id)
-        }}
+        isVisible={isVisibleDeleteCatConfirm}
+        onCancel={onCancelDeleteCatConfirm}
+        onAction={onActionDeleteCatConfirm}
       />
       <ModalDeleteCatInfo
-        isVisible={deleted}
-        onAction={() => cleanCat({ deleted: false })}
+        isVisible={isVisibleDeleteCatInfo}
+        onAction={onActionDeleteCatInfo}
+        onClose={() => {}}
       />
       <ModalUpdateCatInfo
-        isVisible={updated}
-        onAction={() => cleanCat({ updated: false })}
-      />
-      <ModalCreateCatInfo
-        isVisible={created}
-        onAction={() => cleanCat({ created: false })}
+        isVisible={isVisibleUpdateCatInfo}
+        onAction={onActionUpdateCatInfo}
+        onClose={() => {}}
       />
     </>
   );
 }
 
 CatModalContInfo.propTypes = {
-  dataModalDelete: PropTypes.object,
-  setDataModalDelete: PropTypes.func,
-  deleteCat: PropTypes.func,
-  created: PropTypes.bool,
-  deleted: PropTypes.bool,
-  updated: PropTypes.bool,
-  pending: PropTypes.bool,
-  error: PropTypes.number,
-  cleanCat: PropTypes.func
+  isVisibleCreateCatInfo: PropTypes.bool,  
+  isVisibleCatUpdate: PropTypes.bool,  
+  isVisibleDeleteCatConfirm: PropTypes.bool, 
+  isVisibleDeleteCatInfo: PropTypes.bool, 
+  isVisibleUpdateCatInfo: PropTypes.bool, 
+  onActionCreateCatInfo: PropTypes.func,
+  onCancelDeleteCatConfirm: PropTypes.func,
+  onActionDeleteCatConfirm: PropTypes.func,
+  onActionDeleteCatInfo: PropTypes.func,
+  onActionUpdateCatInfo: PropTypes.func,
 }
 
 export default CatModalContInfo

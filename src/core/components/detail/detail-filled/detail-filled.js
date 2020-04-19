@@ -5,7 +5,7 @@ import { Button, ButtonToolbar, Card } from 'react-bootstrap';
 const DetailsActions = ({ actionList }) => (
   <Card.Body>
     <ButtonToolbar>
-      {actionList.map(btn => <Button style={{marginRight: '5px'}} onClick={btn.handlerClick}>{btn.name}</Button>)}
+      {actionList.map(btn => <Button key={btn.id} style={{marginRight: '5px'}} onClick={btn.handlerClick}>{btn.name}</Button>)}
     </ButtonToolbar>
   </Card.Body>
 );

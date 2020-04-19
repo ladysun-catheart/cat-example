@@ -16,19 +16,18 @@ const mapStateToProps = state => ({
   error: state.cat.error
 });;
 const mapDispatchToProps = dispatch => ({
-  getCatList: (page, rows, str) => dispatch(CatActions.getCatListFilter(page, rows, str)),
+  getCatList: (str, page, rows) => dispatch(CatActions.getCatListFilter(str, page, rows)),
   getCat: id => dispatch(CatActions.getCat(id)),
   deleteCat: id => dispatch(CatActions.deleteCat(id)),
-  updateCatCriteriaSearch: str => dispatch(CatActions.updateCatCriteriaSearch(str)),
   cleanCat: cleanProps => dispatch(CatActions.cleanCat(cleanProps))
 });
 const CatMainConnect = connect(mapStateToProps, mapDispatchToProps)(CatMain);
 
 // React-router
-const CatCreateWrapper = props => {
+const CatMainWrapper = props => {
     const history = useHistory();
-    const goToCatUpdate = cat => history.push(`/cat/${cat.id}/update`);
+    const goToCatUpdate = cat => history.push(`/cat/${cat._id}/update`);
     return <CatMainConnect {...props} goToCatUpdate={goToCatUpdate} />;
 };
 
-export default CatCreateWrapper;
+export default CatMainWrapper;
