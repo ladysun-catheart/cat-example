@@ -1,2 +1,2 @@
-import MainContent from './main-content.jsx';
-export default MainContent;
+import MainContentLoading from './main-content.loading.jsx';
+export default MainContentLoading;

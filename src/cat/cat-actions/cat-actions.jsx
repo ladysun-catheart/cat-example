@@ -7,7 +7,7 @@ import {
 } from './utils'
 
 const CatActions = ({ cat }) => {
-  const [selectedType, setSelectedType] = useState('xml')
+  const [selectedType, setSelectedType] = useState('json')
   return (
     <form data-testid={TestIds.catActionsMain} style={{ margin: '20px 0' }}>
       <Row>
@@ -32,16 +32,6 @@ const CatActions = ({ cat }) => {
             </Button>
           <div style={{ display: 'inline-block', marginLeft: '20px' }}>
             <Form.Check
-              data-testid={TestIds.radioXmlCatActionsMain}
-              id="radioXml"
-              type="radio"
-              label="xml"
-              inline
-              value="xml"
-              checked={selectedType === 'xml'}
-              onChange={() => setSelectedType('xml')}
-            />
-            <Form.Check
               data-testid={TestIds.radioJsonCatActionsMain}
               id="radioJson"
               type="radio"
@@ -50,6 +40,16 @@ const CatActions = ({ cat }) => {
               value="json"
               checked={selectedType === 'json'}
               onChange={() => setSelectedType('json')}
+            />
+            <Form.Check
+              data-testid={TestIds.radioXmlCatActionsMain}
+              id="radioXml"
+              type="radio"
+              label="xml"
+              inline
+              value="xml"
+              checked={selectedType === 'xml'}
+              onChange={() => setSelectedType('xml')}
             />
           </div>
         </Col>
