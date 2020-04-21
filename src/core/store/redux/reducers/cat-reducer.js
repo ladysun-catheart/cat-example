@@ -14,7 +14,7 @@ const initialState = {
   catTotalStored: 0,
   catSearch: '',
   pending: false,
-  error: 0,
+  error: null,
   created: false,
   updated: false,
   deleted: false
@@ -37,10 +37,10 @@ function reducer(state = initialState, { type, payload }) {
 
     //GET_CAT
     case success(actions.GET_CAT):
-      nextState = { ...state, actual: payload.res, pending: false }
+      nextState = { ...state, cat: payload.res, pending: false }
       break;
     case error(actions.GET_CAT):
-      nextState = { ...state, actual: null, pending: false, error: payload.err.code };
+      nextState = { ...state, cat: null, pending: false, error: payload.err.code };
       break;
     case pending(actions.GET_CAT):
       nextState = { ...state, pending: true, error: 0 };

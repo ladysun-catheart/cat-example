@@ -3,7 +3,8 @@ import {connect} from 'react-redux'
 import {ContactActions} from '../core/store/redux/actions'
 
 const mapStateToProps = state => ({
-  msg: state.contact.msg
+  msg: state.contact.msg,
+  error: state.contact.error,
 })
 const mapDispatchToProps = dispatch => ({
   sendMessage: msg => dispatch(ContactActions.sendMessage()),

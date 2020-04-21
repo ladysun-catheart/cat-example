@@ -20,8 +20,9 @@ const CatPreUpdateWrapper = () => {
 
 // Redux
 const mapStateToProps = state => ({
-    cat: state.cat.actual,
-    updated: state.cat.updated
+    cat: state.cat.cat,
+    updated: state.cat.updated,
+    error: state.cat.error,
 })
 const mapDispatchToProps = dispatch => ({
     updateCat: newCat => dispatch(CatActions.updateCat(newCat))

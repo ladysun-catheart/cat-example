@@ -4,7 +4,7 @@ import MainContent from './core/main-content';
 import { BrowserRouter as Router } from "react-router-dom";
 import { Provider } from 'react-redux';
 import store from './core/store/redux/store';
-import { ErrorGlobalModal } from './core/config/global-modal';
+import { ToastProvider } from 'react-toast-notifications'
 
 const App = () => (
   <Router>
@@ -17,8 +17,9 @@ const App = () => (
 
 const AppConnected = () => (
   <Provider store={store}>
-    <App />
-    <ErrorGlobalModal />
+      <ToastProvider>
+          <App />
+      </ToastProvider>
   </Provider>
 );
 

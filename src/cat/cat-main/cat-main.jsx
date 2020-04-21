@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TestIds from '../../core/config/test-ids'
+import { useToasts } from 'react-toast-notifications'
 import PropTypes from 'prop-types'
 import { Row, Col } from 'react-bootstrap'
 import CatInfo from './cat-info'
@@ -19,8 +20,10 @@ const CatMain = ({
   rows,
   created,
   updated,
-  deleted
+  deleted,
+  error,
 }) => {
+  const { addToast } = useToasts()
   const [cat, setCat] = useState(null)
   const [firstRender, setFirstRender] = useState(true)
   const [isVisibleCreateCatInfo, setIsVisibleCreateCatInfo] = useState(false)
@@ -38,6 +41,9 @@ const CatMain = ({
   ];
 
   useEffect(() => {
+    if(error) {
+      addToast(error, { appearance: 'error' });
+    }
     if (created) {
       setIsVisibleCreateCatInfo(true)
     }
@@ -49,8 +55,8 @@ const CatMain = ({
     }
     (updated || deleted || firstRender) && getCatList('', page, rows);
     firstRender && setFirstRender(false);
-    (created || updated || deleted) && cleanCat({ created: false, updated: false, deleted: false });
-  }, [firstRender, created, updated, deleted])
+    (error || created || updated || deleted) && cleanCat({ error: null, created: false, updated: false, deleted: false });
+  }, [firstRender, created, updated, deleted, error])
 
   return (
     <>

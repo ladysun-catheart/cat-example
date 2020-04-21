@@ -6,7 +6,8 @@ import { CatActions } from '../../core/store/redux/actions'
 
 // Redux
 const mapStateToProps = state => ({
-    created: state.cat.created
+    created: state.cat.created,
+    error: state.cat.error,
 })
 const mapDispatchToProps = dispatch => ({
     insertCat: newCat => dispatch(CatActions.createCat(newCat)),
