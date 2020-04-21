@@ -6,7 +6,7 @@ import CatForm from '../cat-form';
 const CatCreate = ({ insertCat, goToCatList, created, error }) => {
     const { addToast } = useToasts()
     const handlerSubmit = newCat => insertCat(newCat)
-    created && goToCatList()
+    created && goToCatList();
     error && addToast(error, { appearance: 'error' })
     const cat = {
         name: '',

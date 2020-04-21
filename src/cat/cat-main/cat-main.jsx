@@ -26,10 +26,7 @@ const CatMain = ({
   const { addToast } = useToasts()
   const [cat, setCat] = useState(null)
   const [firstRender, setFirstRender] = useState(true)
-  const [isVisibleCreateCatInfo, setIsVisibleCreateCatInfo] = useState(false)
   const [isVisibleDeleteCatConfirm, setIsVisibleDeleteCatConfirm] = useState(false)
-  const [isVisibleDeleteCatInfo, setIsVisibleDeleteCatInfo] = useState(false)
-  const [isVisibleUpdateCatInfo, setIsVisibleUpdateCatInfo] = useState(false)
   const actionList = [
     { id: 'edit', name: 'Modificar', handlerClick: cat => goToCatUpdate(cat) },
     {
@@ -45,13 +42,13 @@ const CatMain = ({
       addToast(error, { appearance: 'error' });
     }
     if (created) {
-      setIsVisibleCreateCatInfo(true)
+      addToast('The cat was created', { appearance: 'success' });
     }
     else if (deleted) {
-      setIsVisibleDeleteCatInfo(true)
+      addToast('Teh cat was deleted', { appearance: 'success' });
     }
     else if (updated) {
-      setIsVisibleUpdateCatInfo(true)
+      addToast('Teh cat was updated', { appearance: 'success' });
     }
     (updated || deleted || firstRender) && getCatList('', page, rows);
     firstRender && setFirstRender(false);
@@ -91,19 +88,12 @@ const CatMain = ({
         </Col>
       </Row>
       <CatModalContInfo
-        isVisibleCreateCatInfo={isVisibleCreateCatInfo}
         isVisibleDeleteCatConfirm={isVisibleDeleteCatConfirm}
-        isVisibleDeleteCatInfo={isVisibleDeleteCatInfo}
-        isVisibleUpdateCatInfo={isVisibleUpdateCatInfo}
-        onActionCreateCatInfo={() => setIsVisibleCreateCatInfo(false)}
         onCancelDeleteCatConfirm={() => setIsVisibleDeleteCatConfirm(false)}
         onActionDeleteCatConfirm={() => {
           deleteCat(cat._id)
           setIsVisibleDeleteCatConfirm(false)
-          setIsVisibleDeleteCatInfo(true)
         }}
-        onActionDeleteCatInfo={() => setIsVisibleDeleteCatInfo(false)}
-        onActionUpdateCatInfo={() => setIsVisibleUpdateCatInfo(false)}
       />
     </>
   );
