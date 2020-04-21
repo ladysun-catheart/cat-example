@@ -30,7 +30,7 @@ const catRouter = function (Cat) {
   router.post('/filter', function (req, res, next) {
     const { str, page, rows } = req.body
     const queryCount = () => Cat.count({ name: { "$regex": str } }).then(count => Promise.resolve(count))
-    const preQuery = Cat.find({ name: { "$regex": str } })
+    const preQuery = Cat.find({ name: { "$regex": str } }).sort({"$natural": -1})
     page && preQuery.skip((parseInt(page) - 1) * parseInt(rows))
     rows && preQuery.limit(parseInt(rows))
     const query = count => preQuery.then((list, err) => 
